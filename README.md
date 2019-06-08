@@ -64,7 +64,7 @@ C:\>
 
 !
 ```bat
-C:\..\eval-git> echo "# eval-github" >> README.md
+C:\..\eval-git> echo "# eval-git" >> README.md
 C:\..\eval-git> git status
 On branch master
 
@@ -88,9 +88,11 @@ C:\..\eval-git> git status
 
 ![github-create-repository-01.png](./doc/github-create-repository-01.png) 
 
+![github-create-repository-01.png](./doc/github-create-repository-02.png) 
+
 
 ```bat
-C:\..\eval-git> git remote add origin https://github.com/josemarsilva/eval-github.git
+C:\..\eval-git> git remote add origin https://github.com/josemarsilva/eval-git.git
 C:\..\eval-git> git push -u origin master
 Enumerating objects: 3, done.
 Counting objects: 100% (3/3), done.
@@ -98,7 +100,7 @@ Delta compression using up to 4 threads
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 1.03 KiB | 1.03 MiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/josemarsilva/eval-github.git
+To https://github.com/josemarsilva/eval-git.git
  * [new branch]      master -> master
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 ```
@@ -135,9 +137,8 @@ Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 732 bytes | 732.00 KiB/s, done.
 Total 3 (delta 1), reused 0 (delta 0)
 remote: Resolving deltas: 100% (1/1), completed with 1 local object.
-To https://github.com/josemarsilva/eval-github.git
+To https://github.com/josemarsilva/eval-git.git
    1f973ad..7cbddaa  master -> master
-
 ```
 
 ## I - References
