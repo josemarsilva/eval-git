@@ -36,7 +36,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Guia de comandos muitos básicos](https://github.github.com/training-kit/downloads/pt_BR/github-git-cheat-sheet/)
 * [Guia de uso de branches com Git](https://learngitbranching.js.org/)
 * [Laboratório de aprendizado do Git](https://lab.github.com/)
-* [Laboratório Github(https://youtu.be/9S0p8YMQzsM)
+* [Laboratório Github](https://youtu.be/9S0p8YMQzsM)
 * [Guia dos principais comandos](https://help.github.com/en#dotcom)
 
 
@@ -62,7 +62,6 @@ C:\>
 * Adicionando-o ao controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git)
 * Sincronizando com o repositório centralizado do GitHub [`git remote add`](https://help.github.com/en/articles/adding-a-remote)
 
-!
 ```bat
 C:\..\eval-git> echo "# eval-git" >> README.md
 C:\..\eval-git> git status
@@ -140,6 +139,27 @@ remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/josemarsilva/eval-git.git
    1f973ad..7cbddaa  master -> master
 ```
+
+
+### 3.6. Clonando um repositorio de um Git público em sua máquina local
+
+* Obtenha a url do projeto no seu repositório público de [Github](https://github.com/josemarsilva/eval-git). 
+* Em seguida execute o comando [`git clone`](https://git-scm.com/docs/git-clone)
+* Lembre-se: O clone não pode ser feito sobre um sub diretório que já existe
+
+![github-clone-repository-01.png](./doc/github-clone-repository-01.png) 
+
+```bat
+C:\..\eval-git> git clone https://github.com/josemarsilva/eval-git.git
+Cloning into 'eval-git'...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (4/4), done.
+```
+
+
 
 ## I - References
 
