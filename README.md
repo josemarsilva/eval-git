@@ -19,7 +19,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Documentação e Guias](#32-documentação-e-guias)
 * [Inicializando repositório](#33-inicializando-repositório)
 * [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
-
+* [Alterando conteúdo de arquivo](#35-alterando-conteudo-de-arquivo)
 
 ---
 ## 3. Projeto Demonstração
@@ -58,9 +58,11 @@ C:\>
 
 * Criando primeiro arquivo para o controle de arquivos
 * Identificando os arquivos que fazem e que não fazem parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
+* Criar um repositorio público no GitHub
 * Adicionando-o ao controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git)
 * Sincronizando com o repositório centralizado do GitHub [`git remote add`](https://help.github.com/en/articles/adding-a-remote)
 
+!
 ```bat
 C:\..\eval-git> echo "# eval-github" >> README.md
 C:\..\eval-git> git status
@@ -82,6 +84,12 @@ C:\..\eval-git> git commit -a -m "primeiro commit"
  create mode 100644 README.md
  
 C:\..\eval-git> git status
+```
+
+![github-create-repository-01.png](./doc/github-create-repository-01.png) 
+
+
+```bat
 C:\..\eval-git> git remote add origin https://github.com/josemarsilva/eval-github.git
 C:\..\eval-git> git push -u origin master
 Enumerating objects: 3, done.
@@ -119,6 +127,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 C:\..\eval-git> git commit -a -m "."
 [master 7cbddaa] .
  1 file changed, 20 insertions(+), 1 deletion(-)
+C:\..\eval-git> git push
 Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
 Delta compression using up to 4 threads
