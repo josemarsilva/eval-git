@@ -95,6 +95,8 @@ To https://github.com/josemarsilva/eval-github.git
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 ```
 
+### 3.4. Criando primeiro arquivo no repositorio
+
 
 ## I - References
 
