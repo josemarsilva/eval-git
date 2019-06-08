@@ -95,9 +95,28 @@ To https://github.com/josemarsilva/eval-github.git
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 ```
 
-### 3.4. Criando primeiro arquivo no repositorio
+### 3.5. Alterando conteúdo de arquivo
 
+* Alterando o conteúdo do arquivo
+* Identificando que o conteúdo de um dos arquivos foi alterado e não está sincronizado com o repositorio [`git status`](https://git-scm.com/docs/git-status)
+* Garantir que as alterações sejam sincronizadas com o repositorio, inclusive o repositório externo à sua máquina no GitHub [`git commit`](https://git-scm.com/docs/git-commit) [`git push`](https://git-scm.com/docs/git-push)
+
+```bat
+C:\..\eval-git> echo passei por aqui >> README.md
+C:\..\eval-git> git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
 
 ## I - References
 
 * [Git Help](https://git-scm.com/)
+passei por aqui 
