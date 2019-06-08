@@ -1,11 +1,11 @@
 # README - eval-git
 
-## 1. Introduction
+## 1. Introdução
 
 Este repositório contém uma demonstração de avaliação das diversas funcionalidades da ferramenta **Git**:
 
 ---
-## 2. Documentation
+## 2. Documentação
 
 ### 2.1. O que é o Git
 
@@ -19,7 +19,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Documentação e Guias](#32-documentação-e-guias)
 * [Inicializando repositório](#33-inicializando-repositório)
 * [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
-* [Alterando conteúdo de arquivo](#35-alterando-conteudo-de-arquivo)
+* [Alterando conteúdo de arquivo](#35-alterando-conteúdo-de-arquivo)
 
 ---
 ## 3. Projeto Demonstração
