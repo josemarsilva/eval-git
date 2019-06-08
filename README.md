@@ -15,10 +15,10 @@ Este repositório contém uma demonstração de avaliação das diversas funcion
 
 O objetivo deste projeto é explorar os principais conceitos, comandos e cenários possíveis.
 
-* [Instalação](31-instalacao)
-* [Documentação e Guias](32-documentacao-e-guia)
-* [Inicializando repositório](33-inicializando-repositorio)
-* [Criando primeiro arquivo no repositorio](34-criando-primeiro-arquivo-no-repositorio)
+* [Instalação](#31-instalação)
+* [Documentação e Guias](#32-documentação-e-guias)
+* [Inicializando repositório](#33-inicializando-repositório)
+* [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
 
 
 ---
