@@ -21,6 +21,11 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
 * [Alterando conteúdo de arquivo](#35-alterando-conteúdo-de-arquivo)
 * [Desistindo de alterações e revertendo alterações](#37-desistindo-de-alteracoes-e-revertendo-alteracoes)
+  * (#371-cenario-1---desistindo-da-criação-de-um-arquivo-local
+  * (#372-cenario-2---desistindo-de-adicionar-um-arquivo-ao-repositorio-local
+  * (#373-cenario-3---removendo-um-arquivo-do-repositorio-local
+  * (#374-cenario-4---removendo-um-arquivo-do-repositorio-centralizado
+
 
 ---
 ## 3. Projeto Demonstração
@@ -242,7 +247,7 @@ nothing to commit, working tree clean```
   :
 
 
-#### 3.7.3. Cenário 3: Removendo um arquivo do repositorio
+#### 3.7.3. Cenário 3: Removendo um arquivo do repositorio local
 
 * crie um arquivo `file6.txt`
 * identifique que o arquivo não faz parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
@@ -298,6 +303,44 @@ C:\..\eval-git> dir file7.txt
 09/06/2019  17:25                14 file7.txt
   :
 ```
+
+#### 3.7.4. Cenário 4: Removendo um arquivo do repositorio centralizado
+
+* crie um arquivo `file8.txt`
+* adicione o arquivo no controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e faça o commit do arquivo no repositório local[`git commit`](https://git-scm.com/docs/git-commit)
+* empurre o arquivo para o repositorio centralizado [`git push`](https://git-scm.com/docs/git-push)
+* remova o arquivo `file8.txt` do repositório local [`git rm <file>`](https://git-scm.com/docs/git-rm)
+* faça o commit do arquivo no repositório local[`git commit`](https://git-scm.com/docs/git-commit)
+* empurre o arquivo para o repositorio centralizado [`git push`](https://git-scm.com/docs/git-push)
+* procure pelo arquivo `file8.txt` no diretorio local, observe que ele não está mais lá
+* procure pelo arquivo `file8.txt` no diretorio remoto
+
+```bat
+C:\..\eval-git> echo Initialized > file8.txt
+C:\..\eval-git> git add file8.txt
+C:\..\eval-git> git commit -a -m "." 
+C:\..\eval-git> git push
+   :
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 367 bytes | 367.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/josemarsilva/eval-git.git
+To https://github.com/josemarsilva/eval-github.git
+   51873a1..44cbcb4  master -> master
+   :
+C:\..\eval-git> git rm file8.txt
+C:\..\eval-git> git commit -a -m "." 
+C:\..\eval-git> git push
+C:\..\eval-git> dir file8.txt
+Arquivo não encontrado
+```
+
+
 
 
 ### 3.8. Estratégia de gerenciamento de branches
