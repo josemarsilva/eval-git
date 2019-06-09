@@ -348,6 +348,8 @@ Arquivo não encontrado
 
 ![BranchStrategyWorkflow-Context.png](./doc/BranchStrategyWorkflow-Context.png) 
 
+#### 3.8.1. Branches: master, develop, feature, release e hotfix
+
 #### a. master
   * pronto para produção
   * vive "para sempre"
