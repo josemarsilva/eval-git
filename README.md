@@ -348,26 +348,32 @@ Arquivo não encontrado
 
 ![BranchStrategyWorkflow-Context.png](./doc/BranchStrategyWorkflow-Context.png) 
 
-* **master**: 
+#### a. master
   * pronto para produção
   * vive "para sempre"
-* **develop**: 
+
+#### b. develop
   * último desenvolvimento pronto para produção
   * criado a partir da __master__
-* **feature**: 
+
+#### c. feature
   * suporte a funcionalidade
   * mais comum e familiar às pessoas porque elas normalmente trabalham nesta branch
   * criado a partir da __develop__
   * deve finalizar com merge em __develop__;
-* **release**: 
+
+#### d. release
   * suporte a preparação do trabalhao que irá para próxima versão
   * criado a partir da __develop__
   * deve finalizar com merge em __develop__ e __master__
   * convenção de nomes: __release-*__
-* **hotfix**: 
+
+#### e. hotfix
   * mudanças críticas em produção
   * criado a partir da __master__
+  * deve finalizar com merge em __master__ e __develop__
   * convenção de nomes: __hotfix-*__
+
 
 
 
