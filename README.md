@@ -163,8 +163,9 @@ Unpacking objects: 100% (4/4), done.
 
 ### 3.7. Desistindo de alterações e revertendo alterações
 
-* Criando e commitando no repositorio remoto 3 arquivos para exercícios com um único conteúdo "Initialized". 
+Nesta tópico vamos aprender as [inúmeras possibilidades de desfazer alterações](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/)
 
+* Criando e commitando no repositorio remoto 3 arquivos para exercícios com um único conteúdo "Initialized". 
 
 ```bat
 C:\..\eval-git> echo Initialized > file1.txt
@@ -173,10 +174,33 @@ C:\..\eval-git> echo Initialized > file3.txt
 C:\..\eval-git> git add .
 C:\..\eval-git> git commit -a -m "."
 C:\..\eval-git> git push
-
+C:\..\eval-git> git pull
 ```
 
+#### 3.7.1. Cenário 1: Desistindo da criação de um arquivo local
 
+* crie um arquivo `file4.txt`
+* identifique que o arquivo não faz parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
+* remova `del file4.txt` o arquivo e verifique novamente o controle do repositorio
+
+```bat
+C:\..\eval-git> echo Initialized > file4.txt
+C:\..\eval-git> git status
+   : 
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        file4.txt
+   : 
+C:\..\eval-git> del file4.txt
+C:\..\eval-git> git status
+   : 
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+   : 
+```
 
 ### 3.8. Estratégia de gerenciamento de branches
 
