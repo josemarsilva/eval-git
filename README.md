@@ -277,6 +277,21 @@ C:\..\eval-git> echo Initialized > file7.txt
 C:\..\eval-git> git add file7.txt
 C:\..\eval-git> git commit -a -m "."
 C:\..\eval-git> git rm file7.txt --cached
+C:\..\eval-git> git status
+  :
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        deleted:    file7.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        file7.txt
+  :
 C:\..\eval-git> git commit -a -m "."
 C:\..\eval-git> dir file7.txt
   :
