@@ -206,7 +206,7 @@ nothing to commit, working tree clean
 
 * crie um arquivo `file5.txt`
 * identifique que o arquivo não faz parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
-* adicione o arquivo no controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git)
+* adicione o arquivo no controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository)
 * identifique que o arquivo `file5.txt` é um novo arquivo do controle do repositorio mas ainda não foi armazenado no repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
 * desista das alterações locais, podendo recupera-la mais tarde  [`git stash`](https://git-scm.com/docs/git-stash)
 * verifique o status das alteraçoes locais no controle do repositório [`git status`](https://help.github.com/en/articles/about-status-checks)
@@ -241,6 +241,48 @@ Your branch is up to date with 'origin/master'.
 nothing to commit, working tree clean```
   :
 
+
+#### 3.7.3. Cenário 3: Removendo um arquivo do repositorio
+
+* crie um arquivo `file6.txt`
+* identifique que o arquivo não faz parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
+* adicione o arquivo no controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository)
+* faça o commit do arquivo no repositório local[`git commit`](https://git-scm.com/docs/git-commit)
+* remova o arquivo `file6.txt` do repositório [`git rm <file>`](https://git-scm.com/docs/git-rm)
+* procure pelo arquivo `file6.txt` no diretorio local, observe que ele não está mais lá
+* crie um arquivo `file7.txt`
+* adicione o arquivo no controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e faça o commit no repositório local[`git commit`](https://git-scm.com/docs/git-commit)
+* remova o arquivo `file7.txt` do repositório mas mantenha a cópia local em seu diretório de trabalho [`git rm <file> --cached`](https://git-scm.com/docs/git-rm)
+* procure pelo arquivo `file7.txt` no diretorio local, observe que ele ainda está lá
+* identifique que o arquivo `file7.txt` não faz parte do controle do repositorio mas ainda está disponível no diretório local [`git status`](https://help.github.com/en/articles/about-status-checks)
+
+
+
+```bat
+C:\..\eval-git> echo Initialized > file6.txt
+C:\..\eval-git> git status
+  :
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        file5.txt
+  :
+C:\..\eval-git> git add file6.txt
+C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git status
+C:\..\eval-git> git rm file6.txt
+C:\..\eval-git> dir file6.txt
+Arquivo nao encontrado
+C:\..\eval-git> echo Initialized > file7.txt
+C:\..\eval-git> git add file7.txt
+C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git rm file7.txt --cached
+C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> dir file7.txt
+  :
+09/06/2019  17:25                14 file7.txt
+  :
+```
 
 
 ### 3.8. Estratégia de gerenciamento de branches
