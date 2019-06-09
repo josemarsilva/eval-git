@@ -21,10 +21,10 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
 * [Alterando conteúdo de arquivo](#35-alterando-conteúdo-de-arquivo)
 * [Desistindo de alterações e revertendo alterações](#37-desistindo-de-alteracoes-e-revertendo-alteracoes)
-  * (#371-cenario-1---desistindo-da-criação-de-um-arquivo-local
-  * (#372-cenario-2---desistindo-de-adicionar-um-arquivo-ao-repositorio-local
-  * (#373-cenario-3---removendo-um-arquivo-do-repositorio-local
-  * (#374-cenario-4---removendo-um-arquivo-do-repositorio-centralizado
+  * [Cenário 1: Desistindo da criação de um arquivo local](#371-cenario-1-desistindo-da-criação-de-um-arquivo-local
+  * [Cenário 2: Desistindo de adicionar um arquivo ao repositório local](#372-cenario-2-desistindo-de-adicionar-um-arquivo-ao-repositorio-local
+  * [Cenário 3: Removendo um arquivo do repositorio local](#373-cenario-3-removendo-um-arquivo-do-repositorio-local
+  * [Cenário 4: Removendo um arquivo do repositorio centralizado](#374-cenario-4-removendo-um-arquivo-do-repositorio-centralizado
 
 
 ---
