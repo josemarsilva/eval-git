@@ -202,6 +202,47 @@ nothing to commit, working tree clean
    : 
 ```
 
+#### 3.7.2. Cenário 2: Desistindo de adicionar um arquivo ao repositório local
+
+* crie um arquivo `file5.txt`
+* identifique que o arquivo não faz parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
+* adicione o arquivo no controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git)
+* identifique que o arquivo `file5.txt` é um novo arquivo do controle do repositorio mas ainda não foi armazenado no repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
+* desista das alterações locais, podendo recupera-la mais tarde  [`git stash`](https://git-scm.com/docs/git-stash)
+* verifique o status das alteraçoes locais no controle do repositório [`git status`](https://help.github.com/en/articles/about-status-checks)
+* procure o arquivo `file5.txt` no diretorio. Observe que depois do `git stash` o arquivo não está mais no diretório
+* descarte as alterações locais (permanentemente) de um arquivo [`git checkout -- <file>`](https://git-scm.com/docs/git-checkout)
+* descarte todas as alterações locais de todos os aquivos permanentemente [`git reset --hard`](https://git-scm.com/docs/git-reset)
+
+```bat
+C:\..\eval-git> echo Initialized > file5.txt
+C:\..\eval-git> git status
+  :
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        file5.txt
+  :
+C:\..\eval-git> git add .
+C:\..\eval-git> git status
+  :
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   file5.txt
+  :
+C:\..\eval-git> git stash
+Saved working directory and index state WIP on master: 239353a >
+C:\..\eval-git> git status
+  :
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean```
+  :
+
+
+
 ### 3.8. Estratégia de gerenciamento de branches
 
 ![BranchStrategyWorkflow-Context.png](./doc/BranchStrategyWorkflow-Context.png) 
