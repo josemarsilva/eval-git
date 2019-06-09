@@ -20,6 +20,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Inicializando repositório](#33-inicializando-repositório)
 * [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
 * [Alterando conteúdo de arquivo](#35-alterando-conteúdo-de-arquivo)
+* [Desistindo de alterações e revertendo alterações](#37-desistindo-de-alteracoes-e-revertendo-alteracoes)
 
 ---
 ## 3. Projeto Demonstração
@@ -160,8 +161,53 @@ Unpacking objects: 100% (4/4), done.
 ```
 
 
+### 3.7. Desistindo de alterações e revertendo alterações
+
+* Criando e commitando no repositorio remoto 3 arquivos para exercícios com um único conteúdo "Initialized". 
+
+
+```bat
+C:\..\eval-git> echo Initialized > file1.txt
+C:\..\eval-git> echo Initialized > file2.txt
+C:\..\eval-git> echo Initialized > file3.txt
+C:\..\eval-git> git add .
+C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git push
+
+```
+
+
+
+### 3.8. Estratégia de gerenciamento de branches
+
+![BranchStrategyWorkflow-Context.png](./doc/BranchStrategyWorkflow-Context.png) 
+
+* **master**: 
+  * pronto para produção
+  * vive "para sempre"
+* **develop**: 
+  * último desenvolvimento pronto para produção
+  * criado a partir da __master__
+* **feature**: 
+  * suporte a funcionalidade
+  * mais comum e familiar às pessoas porque elas normalmente trabalham nesta branch
+  * criado a partir da __develop__
+  * deve finalizar com merge em __develop__;
+* **release**: 
+  * suporte a preparação do trabalhao que irá para próxima versão
+  * criado a partir da __develop__
+  * deve finalizar com merge em __develop__ e __master__
+  * convenção de nomes: __release-*__
+* **hotfix**: 
+  * mudanças críticas em produção
+  * criado a partir da __master__
+  * convenção de nomes: __hotfix-*__
+
+
+
+
 
 ## I - References
 
 * [Git Help](https://git-scm.com/)
-passei por aqui 
+* [Git Branch Model](https://nvie.com/posts/a-successful-git-branching-model/)
