@@ -25,7 +25,8 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Cenário 2: Desistindo de adicionar um arquivo ao repositório local](#372-cenário-2-desistindo-de-adicionar-um-arquivo-ao-repositório-local)
   * [Cenário 3: Removendo um arquivo do repositorio local](#373-cenario-3-removendo-um-arquivo-do-repositorio-local)
   * [Cenário 4: Removendo um arquivo do repositorio centralizado](#374-cenário-4-removendo-um-arquivo-do-repositorio-centralizado)
-
+* [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches)
+  * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
 
 ---
 ## 3. Projeto Demonstração
@@ -342,8 +343,6 @@ Arquivo não encontrado
 ```
 
 
-
-
 ### 3.8. Estratégia de gerenciamento de branches
 
 ![BranchStrategyWorkflow-Context.png](./doc/BranchStrategyWorkflow-Context.png) 
@@ -355,7 +354,7 @@ Arquivo não encontrado
   * vive "para sempre"
 
 #### b. develop
-  * último desenvolvimento pronto para produção
+  * último desenvolvimento pronto para instalação em ambiente de teste
   * criado a partir da __master__
 
 #### c. feature
@@ -377,7 +376,31 @@ Arquivo não encontrado
   * convenção de nomes: __hotfix-*__
 
 
+#### 3.9. Trabalhando simultaneamente com mais de uma branch
 
+* Suponha o cenário onde existam 2 usuários simultâneos: user1 e user2. Para simular o cenário, vamos criar 2 (dois subdiretorios) um para cada um deles.
+* Todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
+* Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos.
+* O usuário `user1` foi alocado para desenvolver uma nova funcionalidade chamada "a"
+* O usuário `user2` foi convocado para resolver um problema urgente em produção
+* Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [#38-estratégia-de-gerenciamento-de-branches]
+
+![GitTimeline-Example-01.png](./doc/GitTimeline-Example-01.png) 
+
+
+
+```bat
+C:\> cd \         # criando os 3 usuários
+C:\> md user1
+C:\> md user2
+C:\> md user3
+C:\> cd \user1
+C:\user1> git clone https://github.com/josemarsilva/eval-git.git
+C:\user1> cd \user2
+C:\user2> git clone https://github.com/josemarsilva/eval-git.git
+C:\user2> cd \user3
+C:\user3> git clone https://github.com/josemarsilva/eval-git.git
+```
 
 
 
@@ -385,3 +408,4 @@ Arquivo não encontrado
 
 * [Git Help](https://git-scm.com/)
 * [Git Branch Model](https://nvie.com/posts/a-successful-git-branching-model/)
+* [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
