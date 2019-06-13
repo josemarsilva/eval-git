@@ -462,8 +462,6 @@ C:\user2\eval-git> git branch
 
 * Por curiosidade, neste ponto onde as alterações das branches foram feitas localmente, ainda não há nenhum vestígio de mudanças no repositório git da internet. As criações das branches foram feitas localmente e ainda não foi feito commit nem push.
 
-![GitTimeline-Example-02.png](./doc/GitTimeline-Example-01.png) 
-
 * O `user1` cria um novo arquivo `feature_a.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
 
 ```bat
