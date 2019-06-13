@@ -304,6 +304,7 @@ C:\..\eval-git> dir file7.txt
   :
 09/06/2019  17:25                14 file7.txt
   :
+C:\..\eval-git> del file7.txt
 ```
 
 #### 3.7.4. Cenário 4: Removendo um arquivo do repositorio centralizado
@@ -381,26 +382,115 @@ Arquivo não encontrado
 * Suponha o cenário onde existam 2 usuários simultâneos: user1 e user2. Para simular o cenário, vamos criar 2 (dois subdiretorios) um para cada um deles.
 * Todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
 * Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos.
-* O usuário `user1` foi alocado para desenvolver uma nova funcionalidade chamada "a"
-* O usuário `user2` foi convocado para resolver um problema urgente em produção
-* Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [#38-estratégia-de-gerenciamento-de-branches]
+
+```bat
+C:\> md \githome\user1
+C:\> md \githome\user2
+C:\> md \githome\user1
+C:\> cd \githome\user1
+C:\..\user1> git clone https://github.com/josemarsilva/eval-git.git
+C:\user1> cd \githome\user2
+C:\user2> git clone https://github.com/josemarsilva/eval-git.git
+C:\user2> cd \githome\user3
+C:\user3> git clone https://github.com/josemarsilva/eval-git.git
+C:\> dir \githome\user1 /s
+     :
+C:\> dir \githome\user2 /s
+     :
+C:\> dir \githome\user3 /s 
+     :
+```
+
+* Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [#38-estratégia-de-gerenciamento-de-branches]. Na figura abaixo veremos os comandos das atividades que eles vão executar:
 
 ![GitTimeline-Example-01.png](./doc/GitTimeline-Example-01.png) 
 
-
+* O usuário `user1` foi alocado para desenvolver uma nova funcionalidade chamada "a". ELe cria as branches de seu desenvolvimento. [`git branch`](https://git-scm.com/docs/git-branch)  e [`git checkout <nome-da-branch>`](https://git-scm.com/docs/git-checkout) 
 
 ```bat
-C:\> cd \         # criando os 3 usuários
-C:\> md user1
-C:\> md user2
-C:\> md user3
-C:\> cd \user1
-C:\user1> git clone https://github.com/josemarsilva/eval-git.git
-C:\user1> cd \user2
-C:\user2> git clone https://github.com/josemarsilva/eval-git.git
-C:\user2> cd \user3
-C:\user3> git clone https://github.com/josemarsilva/eval-git.git
+C:\> cd \githome\user1\eval-git
+C:\user1\eval-git> git branch develop
+C:\user1\eval-git> git checkout develop
+Switched to branch 'develop'
+C:\user1\eval-git> dir
+  :
+12/06/2019  23:30    <DIR>          doc
+12/06/2019  23:30                14 file1.txt
+12/06/2019  23:30                14 file2.txt
+12/06/2019  23:30                14 file3.txt
+12/06/2019  23:30            16.874 README.md
+  :
+C:\user1\eval-git> git branch feature_a
+C:\user1\eval-git> git checkout feature_a
+Switched to branch 'feature_a'
+C:\user1\eval-git> dir
+  :
+12/06/2019  23:30    <DIR>          doc
+12/06/2019  23:30                14 file1.txt
+12/06/2019  23:30                14 file2.txt
+12/06/2019  23:30                14 file3.txt
+12/06/2019  23:30            16.874 README.md
+  :
+C:\user1\eval-git> git status
+On branch feature_a
+nothing to commit, working tree clean
+C:\user1\eval-git> git branch
+  develop
+* feature_a
+  master
 ```
+
+* O usuário `user2` foi convocado para resolver um problema urgente em produção
+
+```bat
+C:\> cd \githome\user2\eval-git
+C:\user2\eval-git> git branch hotfix
+C:\user2\eval-git> git checkout hotfix
+Switched to branch 'hotfix'
+C:\user2\eval-git> dir
+  :
+12/06/2019  23:30    <DIR>          doc
+12/06/2019  23:30                14 file1.txt
+12/06/2019  23:30                14 file2.txt
+12/06/2019  23:30                14 file3.txt
+12/06/2019  23:30            16.874 README.md
+  :
+C:\user2\eval-git> git branch
+* hotfix
+  master
+```
+
+* Por curiosidade, neste ponto onde as alterações das branches foram feitas localmente, ainda não há nenhum vestígio de mudanças no repositório git da internet. As criações das branches foram feitas localmente e ainda não foi feito commit nem push.
+
+![GitTimeline-Example-02.png](./doc/GitTimeline-Example-01.png) 
+
+* O `user1` cria um novo arquivo `feature_a.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
+
+```bat
+C:\> cd \githome\user1\eval-git
+C:\user1\eval-git> echo desenvolvimento nova feature > feature_a.txt
+C:\user1\eval-git> git add .
+C:\user1\eval-git> git commit -a -m "branch develop e feature_a, com arquivo feature_a.txt"
+[feature_a 26edcbf] branch develop e feature_a, com arquivo feature_a.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 feature_a.txt
+C:\user1\eval-git> git push --set-upstream origin feature_a
+```
+
+
+* O `user2` cria um novo arquivo `hotfix.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
+
+```bat
+C:\> cd \githome\user2\eval-git
+C:\user2\eval-git> echo correcao urgente > hotfix.txt
+C:\user2\eval-git> git add .
+C:\user2\eval-git> git commit -a -m "branch hotfix com arquivo hotfix.txt"
+[hotfix d930859] branch hotfix com arquivo hotfix.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hotfix.txt
+```
+
+
 
 
 
