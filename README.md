@@ -27,7 +27,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Cenário 4: Removendo um arquivo do repositorio centralizado](#374-cenário-4-removendo-um-arquivo-do-repositorio-centralizado)
 * [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches)
   * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
-  * [Trabalhando simultaneamente com mais de uma branch](#39-trabalhando-simultaneamente-com-mais-de-uma-branch)
+  * [Cenário 5: Trabalhando simultaneamente com mais de uma branch](#39-cenário-5-trabalhando-simultaneamente-com-mais-de-uma-branch)
 
 ---
 ## 3. Projeto Demonstração
@@ -378,7 +378,7 @@ Arquivo não encontrado
   * convenção de nomes: __hotfix-*__
 
 
-#### 3.9. Trabalhando simultaneamente com mais de uma branch
+#### 3.9. Cenário 5: Trabalhando simultaneamente com mais de uma branch
 
 * Suponha o cenário onde existam 2 usuários simultâneos: user1 e user2. Para simular o cenário, vamos criar 2 (dois subdiretorios) um para cada um deles.
 * Todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
@@ -505,6 +505,63 @@ C:\user1\eval-git> git push --set-upstream origin hotfix
 
 ![GitTimeline-Example-06.png](./doc/GitTimeline-Example-06.png) 
 
+
+* No(s) pontos: ( `9` ), o usuário `user1` vai fazer [`merge`](https://git-scm.com/docs/git-merge) de sua(s) alteração(ões) da branch `feature_a`, onde ele implementou um novo arquivo `feature_a.txt`, para a branch `develop`. Observe que ele não vai retornar direto para a branch `master`. Ao final do ciclo de vida da `feature_a`, o usuário `user1` vai remover a branch `feature_a`.
+
+```bat
+C:\> cd \githome\user1\eval-git
+C:\..\user1\eval-git> git pull
+C:\..\user1\eval-git> git branch
+  develop
+* feature_a
+  master
+C:\..\user1\eval-git> git checkout develop
+C:\..\user1\eval-git> git merge feature_a
+Updating e224d8d..26edcbf
+Fast-forward
+ feature_a.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 feature_a.txt
+C:\..\user1\eval-git> git status
+On branch develop
+nothing to commit, working tree clean
+C:\..\user1\eval-git> git push --set-upstream origin develop
+C:\..\user1\eval-git> git branch
+* develop
+  feature_a
+  master
+C:\..\user1\eval-git> git branch -d feature_a
+Deleted branch feature_a (was 26edcbf).
+```
+
+* No(s) pontos: ( `10` ), o usuário `user2` vai fazer [`merge`](https://git-scm.com/docs/git-merge) de sua(s) alteração(ões) da branch `hotfix`, onde ele implementou um novo arquivo `hotfix.txt`, para a branch `master`. Observe que tratou-se de uma alteração emergencial diretamente na branch `master`.
+
+```bat
+C:\> cd \githome\user2\eval-git
+C:\..\user2\eval-git> git pull
+C:\..\user2\eval-git> git branch
+* hotfix
+  master
+C:\..\user2\eval-git> git checkout master
+C:\..\user2\eval-git> git pull
+C:\..\user2\eval-git> git merge hotfix
+Merge made by the 'recursive' strategy.
+ hotfix.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hotfix.txt
+C:\..\user2\eval-git> git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working tree clean
+C:\..\user2\eval-git> git push
+```
+
+* No(s) pontos: ( `11` ), o arquivo `hotfix.txt` da branch `hotfix` agora também faz parte da branch `master`. O arquivo `feature_a.txt` da branch `feature_a` agora também faz parte da branch `develop`. A branch `develop` ainda não conhece o arquivo `hotfix.txt`.
+
+![GitTimeline-Example-07.png](./doc/GitTimeline-Example-07.png) 
+
+![GitTimeline-Example-08.png](./doc/GitTimeline-Example-08.png) 
 
 
 
