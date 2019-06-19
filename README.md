@@ -28,6 +28,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches)
   * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
   * [Cenário 5: Trabalhando simultaneamente com mais de uma branch](#39-cenário-5-trabalhando-simultaneamente-com-mais-de-uma-branch)
+  * [Cenário 6: Trabalhando com conflito em alterações](#310-cenário-6-trabalhando-com-conflito-em-alterações)
 
 ---
 ## 3. Projeto Demonstração
@@ -67,7 +68,7 @@ C:\>
 * Criando primeiro arquivo para o controle de arquivos
 * Identificando os arquivos que fazem e que não fazem parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
 * Criar um repositorio público no GitHub
-* Adicionando-o ao controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git)
+* Adicionando-o ao controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git-diff)
 * Sincronizando com o repositório centralizado do GitHub [`git remote add`](https://help.github.com/en/articles/adding-a-remote)
 
 ```bat
@@ -563,6 +564,281 @@ C:\..\user2\eval-git> git push
 
 ![GitTimeline-Example-08.png](./doc/GitTimeline-Example-08.png) 
 
+
+#### 3.10. Cenário 6: Trabalhando com conflito em alterações
+
+* Suponha o cenário onde existam 3 usuários simultâneos: user1, user2 e user3. Para simular o cenário, vamos criar 3 (treis subdiretorios) um para cada um deles.
+
+![GitTimeline-ExampleMergeConflict-01.png](./doc/GitTimeline-ExampleMergeConflict-01.png) 
+
+
+* No(s) ponto(s) ( `1`), todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
+* Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos
+
+```bat
+C:\..\user1> cd \githome\user1
+C:\..\user1> git clone https://github.com/josemarsilva/eval-git.git
+C:\..\user1> cd \githome\user2
+C:\..\user2> git clone https://github.com/josemarsilva/eval-git.git
+C:\..\user2> cd \githome\user3
+C:\..\user3> git clone https://github.com/josemarsilva/eval-git.git
+C:\> dir \githome\user1\eval-git
+C:\> dir \githome\user2\eval-git
+C:\> dir \githome\user3\eval-git
+     :
+19/06/2019  17:58    <DIR>          doc
+19/06/2019  17:58                14 file1.txt
+19/06/2019  17:58                14 file2.txt
+19/06/2019  17:58                14 file3.txt
+19/06/2019  17:58                19 hotfix.txt
+19/06/2019  17:58            23.831 README.md
+     :
+```
+
+* No(s) ponto(s) ( `2`, `3` e `4`), simultaneamente, os 3 usuários `user1`, `user2` e `user3` que durante suas atividades necessitam alterar o arquivo `file1.txt`. Todos os 3 usuários irão modificar o mesmo arquivo `file1.txt':
+  * `user1`, seguindo o procedimento vai criar uma branch `feature_user1` e fazer sua alteração no arquivo `file1.txt` na branch `feature_user1`.
+  * `user2`, seguindo o procedimento vai criar uma branch `feature_user2` e fazer sua alteração no arquivo `file1.txt` na branch `feature_user1`.
+  * `user3`, não conhece direito os procedimentos e vai fazer sua alteração no arquivo `file1.txt` na branch `develop`.
+
+```bat
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git checkout develop
+C:\..\user1> git branch feature_conflict_by_user1
+C:\..\user1> git checkout feature_conflict_by_user1
+Switched to branch 'feature_conflict_by_user1'
+C:\..\user1> git branch
+  develop
+* feature_conflict_by_user1
+  master
+C:\..\user1> cd \githome\user2\eval-git
+C:\..\user2> git checkout develop
+C:\..\user2> git branch feature_conflict_by_user2
+C:\..\user2> git checkout feature_conflict_by_user2
+Switched to branch 'feature_conflict_by_user2'
+C:\..\user2> git branch
+  develop
+* feature_conflict_by_user2
+  master
+C:\..\user2> cd \githome\user3\eval-git
+C:\..\user3> git checkout develop
+C:\..\user3> git branch
+* develop
+  master
+C:\..\user1> cd \githome\user1\eval-git # user1
+```
+
+* ... e fazem suas respectivas alterações no mesmo arquivo `file1.txt`
+
+```bat
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> echo user1 was here >> file1.txt
+C:\..\user1> type file1.txt
+Initialized
+user1 was here
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> echo user2 was here >> file1.txt
+C:\..\user2> type file1.txt
+Initialized
+user2 was here
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user3> echo user3 was here >> file1.txt
+C:\..\user3> type file1.txt
+Initialized
+user3 was here
+```
+
+* No(s) ponto(s) ( `5`), o usuário **user1** faz commit de suas alterações e abre um `pull request` de suas alterações
+
+```bat
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git status
+On branch feature_conflict_by_user1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+        modified:   file1.txt
+no changes added to commit (use "git add" and/or "git commit -a")
+C:\..\user1> git commit -a -m "conflict file1.txt by user1"
+C:\..\user1> git push --set-upstream origin feature_conflict_by_user1
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 305 bytes | 305.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'feature_conflict_by_user1' on GitHub by visiting:
+remote:      https://github.com/josemarsilva/eval-git/pull/new/feature_conflict_by_user1
+remote:
+To https://github.com/josemarsilva/eval-git.git
+ * [new branch]      feature_conflict_by_user1 -> feature_conflict_by_user1
+Branch 'feature_conflict_by_user1' set up to track remote branch 'feature_conflict_by_user1' from 'origin'.
+```
+
+* No(s) ponto(s) ( `6`), o usuário **user2** faz commit de suas alterações e abre um `pull request` de suas alterações
+
+```bat
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git commit -a -m "conflict file1.txt by user2"
+C:\..\user2> git push --set-upstream origin feature_conflict_by_user2
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 307 bytes | 307.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'feature_conflict_by_user2' on GitHub by visiting:
+remote:      https://github.com/josemarsilva/eval-git/pull/new/feature_conflict_by_user2
+remote:
+To https://github.com/josemarsilva/eval-git.git
+ * [new branch]      feature_conflict_by_user2 -> feature_conflict_by_user2
+Branch 'feature_conflict_by_user2' set up to track remote branch 'feature_conflict_by_user2' from 'origin'.
+```
+
+* No(s) ponto(s) ( `7`), o usuário **user3** faz commit de suas alterações e fez `push` direto na branch `develop`
+
+```bat
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user3> git commit -a -m "conflict file1.txt by user3"
+C:\..\user3> git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 303 bytes | 303.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/josemarsilva/eval-git.git
+   26edcbf..ef9759e  develop -> develop
+```
+
+* No(s) ponto(s) ( `8` e `9`), o usuário **user1** ao receber notificação do `pull request` de `user2`, percebe que houve [conflito](https://help.github.com/en/articles/about-pull-requests) e fica responsável por identificar as diferenças com [git diff](https://help.github.com/en/articles/differences-between-commit-views) e fazer o merge das alterações de `user2` na branch `. 
+* Segue aqui mais algumas referências à documentação para resolução de conflitos:
+  * [`git merge`](https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-B%C3%A1sico-de-Branch-e-Merge)
+  * [How to resolve merge conflict](https://git-scm.com/docs/git-merge#_how_to_resolve_conflicts)
+  
+
+
+```bat
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git pull
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 3), reused 5 (delta 2), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From https://github.com/josemarsilva/eval-git
+   26edcbf..ef9759e  develop    -> origin/develop
+ * [new branch]      feature_conflict_by_user2 -> origin/feature_conflict_by_user2
+C:\..\user1> git branch
+  develop
+* feature_conflict_by_user1
+  feature_conflict_by_user2
+  master
+C:\..\user1> type file1.txt
+Initialized
+user1 was here
+C:\..\user1> git checkout feature_conflict_by_user2
+C:\..\user1> type file1.txt
+Initialized
+user2 was here
+C:\..\user1> git diff feature_conflict_by_user1
+diff --git a/file1.txt b/file1.txt
+index 471cbf5..635d3fc 100644
+--- a/file1.txt
++++ b/file1.txt
+@@ -1,2 +1,2 @@
+ Initialized
+-user1 was here
++user2 was here
+C:\..\user1> REM O comando de "git merge" vai juntar os dois arquivos no destino. Isto praticamente inutiliza o arquivo.
+C:\..\user1> git merge feature_conflict_by_user1
+Auto-merging file1.txt
+CONFLICT (content): Merge conflict in file1.txt
+Automatic merge failed; fix conflicts and then commit the result.
+C:\..\user1> git checkout feature_conflict_by_user1
+error: you need to resolve your current index first
+file1.txt: needs merge
+C:\..\user1> type file1.txt
+Initialized
+<<<<<<< HEAD
+user2 was here
+=======
+user1 was here
+>>>>>>> feature_conflict_by_user1
+C:\..\user1> git branch
+  develop
+  feature_conflict_by_user1
+* feature_conflict_by_user2
+  master
+  
+C:\..\user1> REM "git reset --merge" vai desfazer a merja feita pelo merge padrao
+C:\..\user1> git reset --merge
+C:\..\user1> type file1.txt
+C:\..\user1> git merge feature_conflict_by_user1
+C:\..\user1> REM Editando o arquivo para resolver o confito
+C:\..\user1> echo Initialized > file1.txt
+C:\..\user1> echo user1 was here >> file1.txt
+C:\..\user1> echo user2 was here >> file1.txt
+C:\..\user1> type file1.txt
+Initialized
+user1 was here
+user2 was here
+C:\..\user1> git add file1.txt
+C:\..\user1> git merge --continue
+Colocar comentario
+C:\..\user1> git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 357 bytes | 357.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/josemarsilva/eval-git.git
+   62531a0..1df3f0e  feature_conflict_by_user2 -> feature_conflict_by_user2
+C:\..\user1> git checkout feature_conflict_by_user1
+C:\..\user1> echo Initialized > file1.txt
+C:\..\user1> echo user1 was here >> file1.txt
+C:\..\user1> echo user2 was here >> file1.txt
+C:\..\user1> git commit -a -m "."
+C:\..\user1> git push
+```
+
+* No(s) ponto(s) ( `10` ), o usuário **user1** ao tentar fazer o merge de sua branch `feature_conflict_by_user1` (que já fez merge com User2) com a branch `develop`, resolve novamente resolver o conflito.
+
+```bat
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git pull
+C:\..\user1> git diff develop
+@@ -1,2 +1,3 @@
+ Initialized
+-user3 was here
++user1 was here
++user2 was here
+
+C:\..\user1> git merge develop
+Auto-merging file1.txt
+CONFLICT (content): Merge conflict in file1.txt
+Automatic merge failed; fix conflicts and then commit the result.
+C:\..\user1> git merge --abort
+C:\..\user1> echo user3 was here >> file1.txt
+C:\..\user1> git status
+C:\..\user1> git add file1.txt
+C:\..\user1> git commit -a -m "merge feature_conflict_by_user1 vs develop"
+C:\..\user1> git checkout develop
+C:\..\user1> echo Initialized > file1.txt
+C:\..\user1> echo user1 was here >> file1.txt
+C:\..\user1> echo user2 was here >> file1.txt
+C:\..\user1> echo user3 was here >> file1.txt
+C:\..\user1> git commit -a -m "merge feature_conflict_by_user1 x develop"
+C:\..\user1> git push
+C:\..\user1> git branch -d feature_conflict_by_user1
+C:\..\user1> git branch -d feature_conflict_by_user2
+```
 
 
 
