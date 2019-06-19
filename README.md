@@ -27,6 +27,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Cenário 4: Removendo um arquivo do repositorio centralizado](#374-cenário-4-removendo-um-arquivo-do-repositorio-centralizado)
 * [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches)
   * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
+  * [Trabalhando simultaneamente com mais de uma branch](#39-trabalhando-simultaneamente-com-mais-de-uma-branch)
 
 ---
 ## 3. Projeto Demonstração
@@ -405,7 +406,7 @@ C:\> dir \githome\user3 /s
 
 ![GitTimeline-Example-01.png](./doc/GitTimeline-Example-01.png) 
 
-* O usuário `user1` foi alocado para desenvolver uma nova funcionalidade chamada "a". ELe cria as branches de seu desenvolvimento. [`git branch`](https://git-scm.com/docs/git-branch)  e [`git checkout <nome-da-branch>`](https://git-scm.com/docs/git-checkout) 
+* No(s) pontos: ( `1`, `2` ), O usuário `user1` foi alocado para desenvolver uma nova funcionalidade chamada "a". Ele cria as branches de seu desenvolvimento. [`git branch`](https://git-scm.com/docs/git-branch)  e [`git checkout <nome-da-branch>`](https://git-scm.com/docs/git-checkout) 
 
 ```bat
 C:\> cd \githome\user1\eval-git
@@ -440,7 +441,7 @@ C:\user1\eval-git> git branch
   master
 ```
 
-* O usuário `user2` foi convocado para resolver um problema urgente em produção
+* No(s) pontos: ( `1`, `3` ), o usuário `user2` foi convocado para resolver um problema urgente em produção
 
 ```bat
 C:\> cd \githome\user2\eval-git
@@ -460,9 +461,12 @@ C:\user2\eval-git> git branch
   master
 ```
 
-* Por curiosidade, neste ponto onde as alterações das branches foram feitas localmente, ainda não há nenhum vestígio de mudanças no repositório git da internet. As criações das branches foram feitas localmente e ainda não foi feito commit nem push.
+* No(s) pontos: ( `5` ), onde as alterações das branches foram feitas localmente, ainda não há nenhum vestígio de mudanças no repositório git da internet. As criações das branches foram feitas localmente e ainda não foi feito `commit` no repositório local e nem `push` para o repositório central.
 
-* O `user1` cria um novo arquivo `feature_a.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
+![GitTimeline-Example-02.png](./doc/GitTimeline-Example-02.png) 
+
+
+* No(s) pontos: ( `6` ), O `user1` cria um novo arquivo `feature_a.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
 
 ```bat
 C:\> cd \githome\user1\eval-git
@@ -476,7 +480,7 @@ C:\user1\eval-git> git push --set-upstream origin feature_a
 ```
 
 
-* O `user2` cria um novo arquivo `hotfix.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
+* No(s) pontos: ( `7` ), o `user2` cria um novo arquivo `hotfix.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
 
 ```bat
 C:\> cd \githome\user2\eval-git
@@ -486,7 +490,20 @@ C:\user2\eval-git> git commit -a -m "branch hotfix com arquivo hotfix.txt"
 [hotfix d930859] branch hotfix com arquivo hotfix.txt
  1 file changed, 1 insertion(+)
  create mode 100644 hotfix.txt
+C:\user1\eval-git> git push --set-upstream origin hotfix
 ```
+
+* No(s) pontos: ( `8` ),  as alterações de ambos usuários `user1` e `user2` em suas respectivas branches foram feitas localmente e no repositório central. Porém observe que ao consultar os arquivos da branch `master` no repositório central, ele ainda não reflete a criação dos dois novos arquivos `feature_a.txt` e `hotfix.txt`
+
+![GitTimeline-Example-03.png](./doc/GitTimeline-Example-03.png) 
+
+![GitTimeline-Example-04.png](./doc/GitTimeline-Example-04.png) 
+
+* No(s) pontos: ( `8` ), quando clicamos no botão de branches sobre a branch `hotfix`, o repositório já começa a mostrar o novo arquivo `hotfix.txt` desta branch. Mas observe que na branch `hotfix` ainda não existe o arquivo `feature_a` e nem o contrário, na branch `feature_a` não existe o arquivo `hotfix.txt`.
+
+![GitTimeline-Example-05.png](./doc/GitTimeline-Example-05.png) 
+
+![GitTimeline-Example-06.png](./doc/GitTimeline-Example-06.png) 
 
 
 
