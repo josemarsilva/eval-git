@@ -847,3 +847,5 @@ C:\..\user1> git branch -d feature_conflict_by_user2
 * [Git Help](https://git-scm.com/)
 * [Git Branch Model](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
+* [Git Merge Conflict - Youtube](https://www.youtube.com/watch?v=__cR7uPBOIk)
+* [What is Source Code Managment](https://arcadsoftware.com/news-events/blog/what-is-source-code-management/)
