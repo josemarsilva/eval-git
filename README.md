@@ -29,6 +29,9 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
   * [Cenário 5: Trabalhando simultaneamente com mais de uma branch](#39-cenário-5-trabalhando-simultaneamente-com-mais-de-uma-branch)
   * [Cenário 6: Trabalhando com conflito em alterações](#310-cenário-6-trabalhando-com-conflito-em-alterações)
+* [Uso avançado do Git](#311-uso-avancado-do-git)
+  * [Cenário 7: Corrigindo mensagem commit](#3111-cenario----7-corrigindo-mensagem-commit)
+  * [Cenário 8: Consolidando vários commits em um único](#3112-cenario----8-consolidando-varios-commits-em-um-unico)
 
 ---
 ## 3. Projeto Demonstração
@@ -53,7 +56,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 
 * Incializando um repositório [`git init`](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line)
 
-```bat
+```cmd
 C:\> REM Step-01: Criando pasta base do repositorio e a pasta do projeto
 C:\> md c:\githome
 C:\> cd c:\githome
@@ -71,7 +74,7 @@ C:\>
 * Adicionando-o ao controle do repositório [`git add`](https://help.github.com/en/articles/adding-a-file-to-a-repository) e [`git commit`](https://git-scm.com/docs/git-diff)
 * Sincronizando com o repositório centralizado do GitHub [`git remote add`](https://help.github.com/en/articles/adding-a-remote)
 
-```bat
+```cmd
 C:\..\eval-git> echo "# eval-git" >> README.md
 C:\..\eval-git> git status
 On branch master
@@ -99,7 +102,7 @@ C:\..\eval-git> git status
 ![github-create-repository-01.png](./doc/github-create-repository-02.png) 
 
 
-```bat
+```cmd
 C:\..\eval-git> git remote add origin https://github.com/josemarsilva/eval-git.git
 C:\..\eval-git> git push -u origin master
 Enumerating objects: 3, done.
@@ -119,7 +122,7 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
 * Identificando que o conteúdo de um dos arquivos foi alterado e não está sincronizado com o repositorio [`git status`](https://git-scm.com/docs/git-status)
 * Garantir que as alterações sejam sincronizadas com o repositorio, inclusive o repositório externo à sua máquina no GitHub [`git commit`](https://git-scm.com/docs/git-commit) [`git push`](https://git-scm.com/docs/git-push)
 
-```bat
+```cmd
 C:\..\eval-git> echo passei por aqui >> README.md
 C:\..\eval-git> git status
 On branch master
@@ -158,7 +161,7 @@ To https://github.com/josemarsilva/eval-git.git
 
 ![github-clone-repository-01.png](./doc/github-clone-repository-01.png) 
 
-```bat
+```cmd
 C:\..\eval-git> git clone https://github.com/josemarsilva/eval-git.git
 Cloning into 'eval-git'...
 remote: Enumerating objects: 4, done.
@@ -175,7 +178,7 @@ Nesta tópico vamos aprender as [inúmeras possibilidades de desfazer alteraçõ
 
 * Criando e commitando no repositorio remoto 3 arquivos para exercícios com um único conteúdo "Initialized". 
 
-```bat
+```cmd
 C:\..\eval-git> echo Initialized > file1.txt
 C:\..\eval-git> echo Initialized > file2.txt
 C:\..\eval-git> echo Initialized > file3.txt
@@ -191,7 +194,7 @@ C:\..\eval-git> git pull
 * identifique que o arquivo não faz parte do controle do repositorio [`git status`](https://help.github.com/en/articles/about-status-checks)
 * remova `del file4.txt` o arquivo e verifique novamente o controle do repositorio
 
-```bat
+```cmd
 C:\..\eval-git> echo Initialized > file4.txt
 C:\..\eval-git> git status
    : 
@@ -222,7 +225,7 @@ nothing to commit, working tree clean
 * descarte as alterações locais (permanentemente) de um arquivo [`git checkout -- <file>`](https://git-scm.com/docs/git-checkout)
 * descarte todas as alterações locais de todos os aquivos permanentemente [`git reset --hard`](https://git-scm.com/docs/git-reset)
 
-```bat
+```cmd
 C:\..\eval-git> echo Initialized > file5.txt
 C:\..\eval-git> git status
   :
@@ -267,7 +270,7 @@ nothing to commit, working tree clean
 
 
 
-```bat
+```cmd
 C:\..\eval-git> echo Initialized > file6.txt
 C:\..\eval-git> git status
   :
@@ -320,7 +323,7 @@ C:\..\eval-git> del file7.txt
 * procure pelo arquivo `file8.txt` no diretorio local, observe que ele não está mais lá
 * procure pelo arquivo `file8.txt` no diretorio remoto
 
-```bat
+```cmd
 C:\..\eval-git> echo Initialized > file8.txt
 C:\..\eval-git> git add file8.txt
 C:\..\eval-git> git commit -a -m "." 
@@ -385,7 +388,7 @@ Arquivo não encontrado
 * Todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
 * Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos.
 
-```bat
+```cmd
 C:\> md \githome\user1
 C:\> md \githome\user2
 C:\> md \githome\user1
@@ -409,7 +412,7 @@ C:\> dir \githome\user3 /s
 
 * No(s) pontos: ( `1`, `2` ), O usuário `user1` foi alocado para desenvolver uma nova funcionalidade chamada "a". Ele cria as branches de seu desenvolvimento. [`git branch`](https://git-scm.com/docs/git-branch)  e [`git checkout <nome-da-branch>`](https://git-scm.com/docs/git-checkout) 
 
-```bat
+```cmd
 C:\> cd \githome\user1\eval-git
 C:\user1\eval-git> git branch develop
 C:\user1\eval-git> git checkout develop
@@ -444,7 +447,7 @@ C:\user1\eval-git> git branch
 
 * No(s) pontos: ( `1`, `3` ), o usuário `user2` foi convocado para resolver um problema urgente em produção
 
-```bat
+```cmd
 C:\> cd \githome\user2\eval-git
 C:\user2\eval-git> git branch hotfix
 C:\user2\eval-git> git checkout hotfix
@@ -469,7 +472,7 @@ C:\user2\eval-git> git branch
 
 * No(s) pontos: ( `6` ), O `user1` cria um novo arquivo `feature_a.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
 
-```bat
+```cmd
 C:\> cd \githome\user1\eval-git
 C:\user1\eval-git> echo desenvolvimento nova feature > feature_a.txt
 C:\user1\eval-git> git add .
@@ -483,7 +486,7 @@ C:\user1\eval-git> git push --set-upstream origin feature_a
 
 * No(s) pontos: ( `7` ), o `user2` cria um novo arquivo `hotfix.txt` para resolver a sua nova feature. Em seguida adiciona ao repositório local e faz commit em seu repoistório local.
 
-```bat
+```cmd
 C:\> cd \githome\user2\eval-git
 C:\user2\eval-git> echo correcao urgente > hotfix.txt
 C:\user2\eval-git> git add .
@@ -509,7 +512,7 @@ C:\user1\eval-git> git push --set-upstream origin hotfix
 
 * No(s) pontos: ( `9` ), o usuário `user1` vai fazer [`merge`](https://git-scm.com/docs/git-merge) de sua(s) alteração(ões) da branch `feature_a`, onde ele implementou um novo arquivo `feature_a.txt`, para a branch `develop`. Observe que ele não vai retornar direto para a branch `master`. Ao final do ciclo de vida da `feature_a`, o usuário `user1` vai remover a branch `feature_a`.
 
-```bat
+```cmd
 C:\> cd \githome\user1\eval-git
 C:\..\user1\eval-git> git pull
 C:\..\user1\eval-git> git branch
@@ -537,7 +540,7 @@ Deleted branch feature_a (was 26edcbf).
 
 * No(s) pontos: ( `10` ), o usuário `user2` vai fazer [`merge`](https://git-scm.com/docs/git-merge) de sua(s) alteração(ões) da branch `hotfix`, onde ele implementou um novo arquivo `hotfix.txt`, para a branch `master`. Observe que tratou-se de uma alteração emergencial diretamente na branch `master`.
 
-```bat
+```cmd
 C:\> cd \githome\user2\eval-git
 C:\..\user2\eval-git> git pull
 C:\..\user2\eval-git> git branch
@@ -575,7 +578,7 @@ C:\..\user2\eval-git> git push
 * No(s) ponto(s) ( `1`), todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
 * Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos
 
-```bat
+```cmd
 C:\..\user1> cd \githome\user1
 C:\..\user1> git clone https://github.com/josemarsilva/eval-git.git
 C:\..\user1> cd \githome\user2
@@ -600,7 +603,7 @@ C:\> dir \githome\user3\eval-git
   * `user2`, seguindo o procedimento vai criar uma branch `feature_user2` e fazer sua alteração no arquivo `file1.txt` na branch `feature_user1`.
   * `user3`, não conhece direito os procedimentos e vai fazer sua alteração no arquivo `file1.txt` na branch `develop`.
 
-```bat
+```cmd
 C:\..\user1> cd \githome\user1\eval-git
 C:\..\user1> git checkout develop
 C:\..\user1> git branch feature_conflict_by_user1
@@ -629,7 +632,7 @@ C:\..\user1> cd \githome\user1\eval-git # user1
 
 * ... e fazem suas respectivas alterações no mesmo arquivo `file1.txt`
 
-```bat
+```cmd
 C:\..\user1> cd \githome\user1\eval-git
 C:\..\user1> echo user1 was here >> file1.txt
 C:\..\user1> type file1.txt
@@ -649,7 +652,7 @@ user3 was here
 
 * No(s) ponto(s) ( `5`), o usuário **user1** faz commit de suas alterações e abre um `pull request` de suas alterações
 
-```bat
+```cmd
 C:\..\user1> cd \githome\user1\eval-git
 C:\..\user1> git status
 On branch feature_conflict_by_user1
@@ -678,7 +681,7 @@ Branch 'feature_conflict_by_user1' set up to track remote branch 'feature_confli
 
 * No(s) ponto(s) ( `6`), o usuário **user2** faz commit de suas alterações e abre um `pull request` de suas alterações
 
-```bat
+```cmd
 C:\..\user2> cd \githome\user2\eval-git
 C:\..\user2> git commit -a -m "conflict file1.txt by user2"
 C:\..\user2> git push --set-upstream origin feature_conflict_by_user2
@@ -700,7 +703,7 @@ Branch 'feature_conflict_by_user2' set up to track remote branch 'feature_confli
 
 * No(s) ponto(s) ( `7`), o usuário **user3** faz commit de suas alterações e fez `push` direto na branch `develop`
 
-```bat
+```cmd
 C:\..\user3> cd \githome\user3\eval-git
 C:\..\user3> git commit -a -m "conflict file1.txt by user3"
 C:\..\user3> git push
@@ -722,7 +725,7 @@ To https://github.com/josemarsilva/eval-git.git
   
 
 
-```bat
+```cmd
 C:\..\user1> cd \githome\user1\eval-git
 C:\..\user1> git pull
 remote: Enumerating objects: 8, done.
@@ -810,7 +813,7 @@ C:\..\user1> git push
 
 * No(s) ponto(s) ( `10` ), o usuário **user1** ao tentar fazer o merge de sua branch `feature_conflict_by_user1` (que já fez merge com User2) com a branch `develop`, resolve novamente resolver o conflito.
 
-```bat
+```cmd
 C:\..\user1> cd \githome\user1\eval-git
 C:\..\user1> git pull
 C:\..\user1> git diff develop
@@ -841,6 +844,110 @@ C:\..\user1> git branch -d feature_conflict_by_user2
 ```
 
 
+#### 3.11. Uso avançado do Git
+
+##### 3.11.1. Cenário 7 - Corrigindo mensagem commit
+
+Suponha que você criou um novo arquivo `file4.txt`, fez o `git add` e o `git commit` em seu stage local, mas cometeu um erro gravíssimo no texto da mensagem do commit.
+
+```cmd
+C:\..\user1> git checkout master
+Your branch is up to date with 'origin/master'.
+C:\..\user1> git pull
+Already up to date.
+C:\..\user1> echo conteudo 4 > file4.txt
+C:\..\user1> git add file4.txt
+C:\..\user1> git commit -m "addicionando arquivo de quatro"
+[master b2fe8db] addicionando arquivo de quatro
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file4.txt
+C:\..\user1> git log
+commit b2fe8db260bc48ec01854ab35f2872da7d20203f (HEAD -> master)
+Author: josemarsilva
+Date:   Sun Mar 1 19:27:43 2020 -0300
+
+    addicionando arquivo de quatro
+  :
+```
+
+* Putz! E agora? tem como corrigir esta mensagem ou ela vai para o repositório deste jeito? Vou passar maior vergonha! Todo mundo vai rir de mim!
+  * Resposta: Sim. Vamos fazer o `git commit --amend` com a mensagem certa
+
+```cmd
+C:\..\user1> git commit -m "adicionando file4.txt" --amend
+C:\..\user1> git log
+commit 60b592795fc656fea710c8f2756bab8a9cc4878e (HEAD -> master)
+Author: josemarsilva
+Date:   Sun Mar 1 19:27:43 2020 -0300
+
+    adicionando file4.txt
+  :
+```
+
+
+##### 3.11.2. Cenário 8 - Consolidando vários commits em um único
+
+Suponha que em seu processo de desenvolvimento você teve que criar um novo arquivo `file5.txt`. Pensou que era somente este arquivo, então fez `git add .`  e `git commit`.
+Porém na hora de testar, observou que precisou de outro arquivo o `file6.txt`. Novamente pensou que seria somente este, então fez `git add .`  e `git commit`.
+Como TI não é uma ciência exata, você precisou de mais outro arquivo o `file7.txt`. E então fez `git add .`  e `git commit`.
+Daí você notou que a sua alteração, ficou picotada em 3 commits distintos, com 3 mensagens distintas. E pensou: puxa, coitado de quem tiver que entender o que está acontecendo pelas mensagens gravadas!
+
+```cmd
+C:\..\user1> echo conteudo 5 > file5.txt
+C:\..\user1> git add file5.txt
+C:\..\user1> git commit -a -m "adicionando file5"
+[master 4f5f81f] adicionando file5
+ 1 files changed, 1 insertions(+)
+ create mode 100644 file5.txt
+C:\..\user1>
+C:\..\user1> echo conteudo 6 > file6.txt
+C:\..\user1> git add file6.txt
+C:\..\user1> git commit -a -m "adicionando file6"
+[master 0c269d0] adicionando fi
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file6.txt
+C:\..\user1>
+C:\..\user1> echo conteudo 7 > file7.txt
+C:\..\user1> git add file7.txt
+C:\..\user1> git commit -a -m "adicionando file7"
+[master 5d7be86] adicionando file7
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file7.txt
+C:\..\user1> git log
+commit 5d7be86c86d847bac51173e2afbc69f342670ea2 (HEAD -> master)
+Author: josemarsilva <josemar.furegatti@gmail.com>
+Date:   Sun Mar 1 19:49:13 2020 -0300
+
+    adicionando file7
+
+commit 0c269d05e23ab1b800a16c6881838f917f047e1a
+Author: josemarsilva <josemar.furegatti@gmail.com>
+Date:   Sun Mar 1 19:48:09 2020 -0300
+
+    adicionando file6
+
+commit 4f5f81f3832912d407c6098f5f7e0355373495b5
+Author: josemarsilva <josemar.furegatti@gmail.com>
+Date:   Sun Mar 1 19:46:13 2020 -0300
+
+    adicionando file5
+         :
+```
+
+* Será que tem jeito de juntar os 3 últimos commits com os arquivos `file5.txt`, `file6.txt` e `file7.txt` em um único pacote? Afinal eles eram para ser um único pacote!
+  * Resposta: Sim
+
+* Precisamos saber que o último commit é etiquetado como _HEAD_
+* Os commits são guardados em uma estrutura de lista ligada simples e os commits anteriores podem ser referenciados de forma relativa ao _HEAD_
+* Podemos navegar por esta lista ligada, referenciando de forma relativa os _últimos 3 commits_
+* O commando `git reset` tem 2 opções a saber: *--hard* e *--soft*
+* A opção `git reset --hard` é para ser usada quando você bagunçou tudo e quer voltar para traz, jogando tudo o que fez fora! Equivale a fazer um novo `git clone`
+* A opção `git reset --soft` é para ele apenas desfazer as alterações do repositório, deixando os arquivos intactos
+* Vejamos como fica
+
+```cmd
+
+```
 
 ## I - References
 
@@ -849,3 +956,4 @@ C:\..\user1> git branch -d feature_conflict_by_user2
 * [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
 * [Git Merge Conflict - Youtube](https://www.youtube.com/watch?v=__cR7uPBOIk)
 * [What is Source Code Managment](https://arcadsoftware.com/news-events/blog/what-is-source-code-management/)
+* [Usando Git direito (nao é basico) - por Fabio Akita](https://www.youtube.com/watch?v=6OokP-NE49k&t=2123s)
