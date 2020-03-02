@@ -34,6 +34,8 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Cenário 8: Consolidando vários commits em um único](#3112-cenario----8-consolidando-varios-commits-em-um-unico)
   * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenario----9-remover-um-arquivo-do-stage-de-commit)
   * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#3114-cenario----10-escolher-os-arquivos-do-stage-para-commit-em-modo-iterativo)
+  * [Cenário 11: Separar as alterações de um mesmo arquivo em dois commits distintos](#3115-cenario----11-separar-as-alteracoes-de-um-mesmo-arquivo-em-dois-commits-distintos)
+
 
 ---
 ## 3. Projeto Demonstração
@@ -1108,6 +1110,11 @@ C:\..\user1> git commit -m "alteracoes pacote 1: file4.txt e file5.txt"
 ```cmd
 C:\..\user1> git add 
 ```
+
+
+##### 3.11.5. Cenário 11 - Separar as alterações de um mesmo arquivo em dois commits distintos
+
+
 
 
 ## I - References
