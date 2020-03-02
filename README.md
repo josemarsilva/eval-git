@@ -1076,7 +1076,7 @@ C:\..\user1> git add -i
   5: patch        6: diff         7: quit         8: help
 ```
 
-* Nas opções do `git add -i` vamos fazer: a) opção 3 - reverter do stage os arquivos `README.md`, `file6.txt` e `file7.txt`
+* Utilizando as opções iterativas `git add -i` vamos fazer: a) opção 3 - reverter do stage os arquivos `README.md`, `file6.txt` e `file7.txt`
 * Em seguida `git commit -a -m "alteracoes pacote 1: file4.txt e file5.txt"`
 
 ```cmd
@@ -1098,9 +1098,16 @@ Changes not staged for commit:
         modified:   file6.txt
         modified:   file7.txt
 
-C:\..\user1> git 
+C:\..\user1> git commit -m "alteracoes pacote 1: file4.txt e file5.txt"
+[master 558f755] alteracoes pacote 1: file4.txt e file5.txt
+ 5 files changed, 121 insertions(+), 2 deletions(-)
 ```
 
+* Em seguida adicionar o segundo pacote:
+
+```cmd
+C:\..\user1> git add 
+```
 
 
 ## I - References
