@@ -1111,9 +1111,7 @@ C:\..\user1> git commit -m "alteracoes pacote 1: file4.txt e file5.txt"
 C:\..\user1> git add 
 ```
 
-
 ##### 3.11.5. Cenário 11 - Separar as alterações de um mesmo arquivo em dois commits distintos
-
 
 
 
