@@ -32,6 +32,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Uso avançado do Git](#311-uso-avancado-do-git)
   * [Cenário 7: Corrigindo mensagem commit](#3111-cenario----7-corrigindo-mensagem-commit)
   * [Cenário 8: Consolidando vários commits em um único](#3112-cenario----8-consolidando-varios-commits-em-um-unico)
+  * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenario----9-remover-um-arquivo-do-stage-de-commit)
 
 ---
 ## 3. Projeto Demonstração
@@ -943,11 +944,49 @@ Date:   Sun Mar 1 19:46:13 2020 -0300
 * O commando `git reset` tem 2 opções a saber: *--hard* e *--soft*
 * A opção `git reset --hard` é para ser usada quando você bagunçou tudo e quer voltar para traz, jogando tudo o que fez fora! Equivale a fazer um novo `git clone`
 * A opção `git reset --soft` é para ele apenas desfazer as alterações do repositório, deixando os arquivos intactos
-* Vejamos como fica
+
+* Vamos corrigir ...
 
 ```cmd
+C:\..\user1> git reset --soft HEAD~3
+C:\..\user1> git status
+n branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
 
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   file5.txt
+        new file:   file6.txt
+        new file:   file7.txt
 ```
+
+* Agora podemos fazer o `git add` para os 3 arquivos juntos e um único commit da alteração
+
+```cmd
+C:\..\user1> git add file5.txt file6.txt file7.txt
+C:\..\user1> git commit -a -m "alteração em conjunto de file5.txt file6.txt file7.txt"
+C:\..\user1> git push
+```
+
+
+##### 3.11.3. Cenário 9 - Remover um arquivo do stage de commit
+
+* Suponha que você tenha feito alterações em vários arquivos
+* Em paralelo te pediram para corrigir outro problema que envolve alterações em outros arquivos
+* Por um deslize ou força de hábito você adicionou todas as alterações no stage com `git add .`
+* Para piorar a situação você alterou o README.md da documentação que não tem a ver com as alterações
+* Em resumo, você quer remover 
+
+```cmd
+C:\..\user1> echo alteracao >> file4.txt
+C:\..\user1> echo alteracao >> file5.txt
+C:\..\user1> echo alteracao >> file6.txt
+C:\..\user1> echo alteracao >> file7.txt
+C:\..\user1> echo --- >> README.md
+```
+
 
 ## I - References
 
@@ -956,4 +995,4 @@ Date:   Sun Mar 1 19:46:13 2020 -0300
 * [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
 * [Git Merge Conflict - Youtube](https://www.youtube.com/watch?v=__cR7uPBOIk)
 * [What is Source Code Managment](https://arcadsoftware.com/news-events/blog/what-is-source-code-management/)
-* [Usando Git direito (nao é basico) - por Fabio Akita](https://www.youtube.com/watch?v=6OokP-NE49k&t=2123s)
+* [Usando Git direito (nao é basico) - por Fabio Akita](https://www.youtube.com/watch?v=6OokP-NE49k&t=2123s)--- 
