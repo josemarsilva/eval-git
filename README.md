@@ -35,6 +35,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenario----9-remover-um-arquivo-do-stage-de-commit)
   * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#3114-cenario----10-escolher-os-arquivos-do-stage-para-commit-em-modo-iterativo)
   * [Cenário 11: Separar as alterações de um mesmo arquivo em dois commits distintos](#3115-cenario----11-separar-as-alteracoes-de-um-mesmo-arquivo-em-dois-commits-distintos)
+  * [Cenário 12: Usando Git para arquivos binários](#3116-cenario----12-usando-git-para-arquivos-binarios)
 
 
 ---
@@ -1112,6 +1113,10 @@ C:\..\user1> git add
 ```
 
 ##### 3.11.5. Cenário 11 - Separar as alterações de um mesmo arquivo em dois commits distintos
+
+
+##### 3.11.6. Cenário 12 - Usando Git para arquivos binários
+
 
 
 
