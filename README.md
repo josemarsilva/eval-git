@@ -33,6 +33,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Cenário 7: Corrigindo mensagem commit](#3111-cenario----7-corrigindo-mensagem-commit)
   * [Cenário 8: Consolidando vários commits em um único](#3112-cenario----8-consolidando-varios-commits-em-um-unico)
   * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenario----9-remover-um-arquivo-do-stage-de-commit)
+  * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#3114-cenario----10-escolher-os-arquivos-do-stage-para-commit-em-modo-iterativo)
 
 ---
 ## 3. Projeto Demonstração
@@ -975,9 +976,8 @@ C:\..\user1> git push
 
 * Suponha que você tenha feito alterações em vários arquivos
 * Em paralelo te pediram para corrigir outro problema que envolve alterações em outros arquivos
-* Por um deslize ou força de hábito você adicionou todas as alterações no stage com `git add .`
 * Para piorar a situação você alterou o README.md da documentação que não tem a ver com as alterações
-* Em resumo, você quer remover 
+* Por um deslize ou força de hábito você adicionou todas as alterações no stage com `git add .`
 
 ```cmd
 C:\..\user1> echo alteracao >> file4.txt
@@ -985,7 +985,122 @@ C:\..\user1> echo alteracao >> file5.txt
 C:\..\user1> echo alteracao >> file6.txt
 C:\..\user1> echo alteracao >> file7.txt
 C:\..\user1> echo --- >> README.md
+C:\..\user1> git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+        modified:   file4.txt
+        modified:   file5.txt
+        modified:   file6.txt
+        modified:   file7.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
 ```
+
+* Ai então você fez o `git add .` indevido! Indevido porque vocè queria separar em 2 commits distintos: o primeiro deles com as alterações nos arquivos `file4.txt`, `file5.txt`, `file6.txt` e `file7.txt`. E o segundo com o arquivo `README.md`  
+
+```cmd
+C:\..\user1> git add .
+C:\..\user1> git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   README.md
+        modified:   file4.txt
+        modified:   file5.txt
+        modified:   file6.txt
+        modified:   file7.txt
+```
+
+* Será que tem jeito de remover do Stage somente o arquivo `README.md` ?
+  * Resposta: Sim, vamos reverter o `README.md` do stage
+
+```cmd
+C:\..\user1> git reset -- README.md
+Unstaged changes after reset:
+M       README.md
+C:\..\user1> git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   file4.txt
+        modified:   file5.txt
+        modified:   file6.txt
+        modified:   file7.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+```
+
+
+##### 3.11.4. Cenário 10 - Escolher os arquivo do stage para commit em modo iterativo
+
+* Suponha que vocè tenha feito alterações em vários arquivos
+* Gostaria de dividí-los em 2 commit's distintos, porque dizem respeito a assuntos distintos
+
+```cmd
+C:\..\user1> echo alteracao 1 >> file4.txt
+C:\..\user1> echo alteracao 1 >> file5.txt
+C:\..\user1> echo alteracao 2 >> file6.txt
+C:\..\user1> echo alteracao 2 >> file7.txt
+C:\..\user1> git add .
+```
+
+* Vamos adicionar os arquivos ao stage de forma iterativa com o `git add -i`
+
+```cmd
+C:\..\user1> git add -i
+           staged     unstaged path
+  1:       +91/-2      nothing README.md
+  2:        +1/-0      nothing file4.txt
+  3:        +1/-0      nothing file5.txt
+  4:        +1/-0      nothing file6.txt
+  5:        +1/-0      nothing file7.txt
+
+*** Commands ***
+  1: status       2: update       3: revert       4: add untracked
+  5: patch        6: diff         7: quit         8: help
+```
+
+* Nas opções do `git add -i` vamos fazer: a) opção 3 - reverter do stage os arquivos `README.md`, `file6.txt` e `file7.txt`
+* Em seguida `git commit -a -m "alteracoes pacote 1: file4.txt e file5.txt"`
+
+```cmd
+C:\..\user1> git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   file4.txt
+        modified:   file5.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+        modified:   file6.txt
+        modified:   file7.txt
+
+C:\..\user1> git 
+```
+
 
 
 ## I - References
