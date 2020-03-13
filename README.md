@@ -1127,4 +1127,6 @@ C:\..\user1> git add
 * [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
 * [Git Merge Conflict - Youtube](https://www.youtube.com/watch?v=__cR7uPBOIk)
 * [What is Source Code Managment](https://arcadsoftware.com/news-events/blog/what-is-source-code-management/)
-* [Usando Git direito (nao é basico) - por Fabio Akita](https://www.youtube.com/watch?v=6OokP-NE49k&t=2123s)--- 
+* [Usando Git direito (não é basico) - por Fabio Akita](https://www.youtube.com/watch?v=6OokP-NE49k&t=2123s)
+
+--- 
