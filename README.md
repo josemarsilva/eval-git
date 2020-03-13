@@ -29,13 +29,13 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
   * [Cenário 5: Trabalhando simultaneamente com mais de uma branch](#39-cenário-5-trabalhando-simultaneamente-com-mais-de-uma-branch)
   * [Cenário 6: Trabalhando com conflito em alterações](#310-cenário-6-trabalhando-com-conflito-em-alterações)
-* [Uso avançado do Git](#311-uso-avancado-do-git)
-  * [Cenário 7: Corrigindo mensagem commit](#3111-cenario----7-corrigindo-mensagem-commit)
-  * [Cenário 8: Consolidando vários commits em um único](#3112-cenario----8-consolidando-varios-commits-em-um-unico)
-  * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenario----9-remover-um-arquivo-do-stage-de-commit)
-  * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#3114-cenario----10-escolher-os-arquivos-do-stage-para-commit-em-modo-iterativo)
-  * [Cenário 11: Separar as alterações de um mesmo arquivo em dois commits distintos](#3115-cenario----11-separar-as-alteracoes-de-um-mesmo-arquivo-em-dois-commits-distintos)
-  * [Cenário 12: Usando Git para arquivos binários](#3116-cenario----12-usando-git-para-arquivos-binarios)
+* [Uso avançado do Git](#311-uso-avançado-do-git)
+  * [Cenário 7: Corrigindo mensagem commit](#3111-cenário-7---corrigindo-mensagem-commit)
+  * [Cenário 8: Consolidando vários commits em um único](#3112-cenário-8---consolidando-vários-commits-em-um-único)
+  * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenário-9---remover-um-arquivo-do-stage-de-commit)
+  * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#3114-cenário-10---escolher-os-arquivo-do-stage-para-commit-em-modo-iterativo)
+  * [Cenário 11: Separar as alterações de um mesmo arquivo em dois commits distintos](#3115-cenário-11---separar-as-alterações-de-um-mesmo-arquivo-em-dois-commits-distintos)
+  * [Cenário 12: Usando Git para arquivos binários](#3116-cenário-12---usando-git-para-arquivos-binários)
 
 
 ---
