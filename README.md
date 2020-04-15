@@ -1123,6 +1123,7 @@ C:\..\user1> git add
 ## I - References
 
 * [Git Help](https://git-scm.com/)
+* [Git Manual de Bolso](https://ndpsoftware.com/git-cheatsheet.html)
 * [Git Branch Model](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
 * [Git Merge Conflict - Youtube](https://www.youtube.com/watch?v=__cR7uPBOIk)
