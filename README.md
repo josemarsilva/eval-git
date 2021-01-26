@@ -46,6 +46,12 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * Em [https://git-scm.com/](https://git-scm.com/) você encontra link para download e instalação da última versão do Git (gratuita)
 * Em [https://github.com](https://github.com) você encontra um serviço de repositório centralizado do Git (gratuito)
 
+#### 3.1.1. Pré-requisitos
+
+Os pré-requisitos necessários para você continuar são:
+* Uma ferramenta _Git Client_ de linha de comando
+* Uma conta ativa em um serviço de _Git_ público: https://github.com/ ou https://gitlab.com/ ou https://bitbucket.org/
+
 
 ### 3.2. Documentação e Guias
 
@@ -56,8 +62,18 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Laboratório Github](https://youtu.be/9S0p8YMQzsM)
 * [Guia dos principais comandos](https://help.github.com/en#dotcom)
 
+#### 3.2.1. O mínimo que você precisa saber
+
+* Sobre repositório local e remoto
+
+![git-repositories-local-remote-01.png](./doc/git-repositories-local-remote-01.png)
+
+![git-repositories-local-remote-02.png](./doc/git-repositories-local-remote-02.png)
+
 
 ### 3.3. Inicializando repositório
+
+#### 3.3.1. (Opção 1) Repositório local em sua máquina
 
 * Incializando um repositório [`git init`](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line)
 
@@ -70,6 +86,58 @@ C:\..\eval-git> git init
 Initialized empty Git repository in C:/GitHome/eval-git/.git/
 C:\> 
 ```
+
+#### 3.3.2. (Opção 2): Pela interface Web do serviço GitHub e clonagem do repositório
+
+* Criando repositório pela interface Web do GitHub
+  * Faça o login em https://github.com
+  * Siga os passos a seguir
+
+![github-create-repository-web-interace-01.png](./doc/github-create-repository-web-interace-01.png)
+
+![github-create-repository-web-interace-02.png](./doc/github-create-repository-web-interace-02.png)
+
+![github-create-repository-web-interace-03.png](./doc/github-create-repository-web-interace-03.png)
+
+* Clonando o repositório do GitHub
+
+![github-create-repository-web-interace-04.png](./doc/github-create-repository-web-interace-04.png)
+
+
+#### 3.3.3. (Opção 3): Pela interface Web do serviço GitLab e clonagem do repositório
+
+* Criando repositório pela interface Web do GitLab
+  * Faça o login em https://gitlab.com
+  * Siga os passos a seguir
+
+![gitlab-create-repository-web-interace-01.png](./doc/gitlab-create-repository-web-interace-01.png)
+
+![gitlab-create-repository-web-interace-02.png](./doc/gitlab-create-repository-web-interace-02.png)
+
+![gitlab-create-repository-web-interace-03.png](./doc/gitlab-create-repository-web-interace-03.png)
+
+
+* Clonando o repositório do GitHub
+
+![gitlab-create-repository-web-interace-04.png](./doc/gitlab-create-repository-web-interace-04.png)
+
+
+#### 3.4. Configurando seu usuario e senha
+
+* Configure corretamente seu nome completo e e-mail
+* São 2 estratégias de configuração de usuário:
+  * Global: Unica para a máquina client
+  * Local: Personalizada para o usuario logado (preferencia)
+* Configure corretamente seu nome e endereço de e-mail para
+* Há situações em repositórios locais de empresa onde você precise desabilitar a verificação de protocolo SSL por causa de certificados locais auto-assinado
+
+```cmd
+git config --local user.name "Nome Sobrenome"
+git config --local user.email "emailaddress@dominio.com.br"
+git config http.sslVerify "false"
+git config --list
+```
+
 
 ### 3.4. Criando primeiro arquivo no repositorio
 
@@ -102,10 +170,13 @@ C:\..\eval-git> git commit -a -m "primeiro commit"
 C:\..\eval-git> git status
 ```
 
+#### Opção 1 (somente): Adicionando repositório remoto ao seu repositório local
+
+* Relacionando um repositorio remoto ao seu repositório (até então somente) local
+
 ![github-create-repository-01.png](./doc/github-create-repository-01.png) 
 
 ![github-create-repository-01.png](./doc/github-create-repository-02.png) 
-
 
 ```cmd
 C:\..\eval-git> git remote add origin https://github.com/josemarsilva/eval-git.git
@@ -120,6 +191,24 @@ To https://github.com/josemarsilva/eval-git.git
  * [new branch]      master -> master
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 ```
+
+
+#### Opção 1, 2 e 3: Subindo os arquivos locais para o repositorio
+
+```cmd
+C:\..\eval-git> git push
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 1.03 KiB | 1.03 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/josemarsilva/eval-git.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+```
+
+
 
 ### 3.5. Alterando conteúdo de arquivo
 
@@ -188,7 +277,7 @@ C:\..\eval-git> echo Initialized > file1.txt
 C:\..\eval-git> echo Initialized > file2.txt
 C:\..\eval-git> echo Initialized > file3.txt
 C:\..\eval-git> git add .
-C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git commit -a -m "file1.txt file2.txt file3.txt"
 C:\..\eval-git> git push
 C:\..\eval-git> git pull
 ```
@@ -285,14 +374,14 @@ Untracked files:
         file5.txt
   :
 C:\..\eval-git> git add file6.txt
-C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git commit -a -m "file6.txt"
 C:\..\eval-git> git status
 C:\..\eval-git> git rm file6.txt
 C:\..\eval-git> dir file6.txt
 Arquivo nao encontrado
 C:\..\eval-git> echo Initialized > file7.txt
 C:\..\eval-git> git add file7.txt
-C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git commit -a -m "file7.txt"
 C:\..\eval-git> git rm file7.txt --cached
 C:\..\eval-git> git status
   :
@@ -309,7 +398,7 @@ Untracked files:
 
         file7.txt
   :
-C:\..\eval-git> git commit -a -m "."
+C:\..\eval-git> git commit -a -m "rm file7.txt"
 C:\..\eval-git> dir file7.txt
   :
 09/06/2019  17:25                14 file7.txt
@@ -331,7 +420,7 @@ C:\..\eval-git> del file7.txt
 ```cmd
 C:\..\eval-git> echo Initialized > file8.txt
 C:\..\eval-git> git add file8.txt
-C:\..\eval-git> git commit -a -m "." 
+C:\..\eval-git> git commit -a -m "file8.txt" 
 C:\..\eval-git> git push
    :
 Enumerating objects: 5, done.
@@ -347,7 +436,7 @@ To https://github.com/josemarsilva/eval-github.git
    51873a1..44cbcb4  master -> master
    :
 C:\..\eval-git> git rm file8.txt
-C:\..\eval-git> git commit -a -m "." 
+C:\..\eval-git> git commit -a -m "rm file8.txt" 
 C:\..\eval-git> git push
 C:\..\eval-git> dir file8.txt
 Arquivo não encontrado
