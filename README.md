@@ -29,13 +29,17 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
   * [Branches: master, develop, feature, release e hotfix](#381-branches-master-develop-feature-release-e-hotfix)
   * [Cenário 5: Trabalhando simultaneamente com mais de uma branch](#39-cenário-5-trabalhando-simultaneamente-com-mais-de-uma-branch)
   * [Cenário 6: Trabalhando com conflito em alterações](#310-cenário-6-trabalhando-com-conflito-em-alterações)
-* [Uso avançado do Git](#311-uso-avançado-do-git)
-  * [Cenário 7: Corrigindo mensagem commit](#3111-cenário-7---corrigindo-mensagem-commit)
-  * [Cenário 8: Consolidando vários commits em um único](#3112-cenário-8---consolidando-vários-commits-em-um-único)
-  * [Cenário 9: Remover um arquivo do stage de commit](#3113-cenário-9---remover-um-arquivo-do-stage-de-commit)
-  * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#3114-cenário-10---escolher-os-arquivo-do-stage-para-commit-em-modo-iterativo)
-  * [Cenário 11: Separar as alterações de um mesmo arquivo em dois commits distintos](#3115-cenário-11---separar-as-alterações-de-um-mesmo-arquivo-em-dois-commits-distintos)
-  * [Cenário 12: Usando Git para arquivos binários](#3116-cenário-12---usando-git-para-arquivos-binários)
+* [Uso avançado do Git](#4-uso-avançado-do-git)
+  * [Cenário 7: Corrigindo mensagem commit](#41-cenário-7---corrigindo-mensagem-commit)
+  * [Cenário 8: Consolidando vários commits em um único](#42-cenário-8---consolidando-vários-commits-em-um-único)
+  * [Cenário 9: Remover um arquivo do stage de commit](#43-cenário-9---remover-um-arquivo-do-stage-de-commit)
+  * [Cenário 10: Escolher os arquivo do stage para commit em modo iterativo](#4-cenário-10---escolher-os-arquivo-do-stage-para-commit-em-modo-iterativo)
+  * [Cenário 11: Separar as alterações de um mesmo arquivo em dois commits distintos](#45-cenário-11---separar-as-alterações-de-um-mesmo-arquivo-em-dois-commits-distintos)
+  * [Cenário 12: Usando Git para arquivos binários](#46-cenário-12---usando-git-para-arquivos-binários)
+* Situações comuns
+  * Ignorar arquivos
+  * Ignorar arquivos após terem sido registrados acidentalmente no repositório
+* Normas, Padrões, Convenções, Melhores Práticas, Lições Aprendidas, Deslize, Micos e Vexames
 
 
 ---
@@ -960,9 +964,9 @@ C:\..\user1> git branch -d feature_conflict_by_user2
 ```
 
 
-#### 3.11. Uso avançado do Git
+#### 4. Uso avançado do Git
 
-##### 3.11.1. Cenário 7 - Corrigindo mensagem commit
+##### 4.1. Cenário 7 - Corrigindo mensagem commit
 
 Suponha que você criou um novo arquivo `file4.txt`, fez o `git add` e o `git commit` em seu stage local, mas cometeu um erro gravíssimo no texto da mensagem do commit.
 
@@ -1001,7 +1005,7 @@ Date:   Sun Mar 1 19:27:43 2020 -0300
 ```
 
 
-##### 3.11.2. Cenário 8 - Consolidando vários commits em um único
+##### 4.2. Cenário 8 - Consolidando vários commits em um único
 
 Suponha que em seu processo de desenvolvimento você teve que criar um novo arquivo `file5.txt`. Pensou que era somente este arquivo, então fez `git add .`  e `git commit`.
 Porém na hora de testar, observou que precisou de outro arquivo o `file6.txt`. Novamente pensou que seria somente este, então fez `git add .`  e `git commit`.
@@ -1086,7 +1090,7 @@ C:\..\user1> git push
 ```
 
 
-##### 3.11.3. Cenário 9 - Remover um arquivo do stage de commit
+##### 4.3. Cenário 9 - Remover um arquivo do stage de commit
 
 * Suponha que você tenha feito alterações em vários arquivos
 * Em paralelo te pediram para corrigir outro problema que envolve alterações em outros arquivos
@@ -1161,7 +1165,7 @@ Changes not staged for commit:
 ```
 
 
-##### 3.11.4. Cenário 10 - Escolher os arquivo do stage para commit em modo iterativo
+##### 4.4. Cenário 10 - Escolher os arquivo do stage para commit em modo iterativo
 
 * Suponha que vocè tenha feito alterações em vários arquivos
 * Gostaria de dividí-los em 2 commit's distintos, porque dizem respeito a assuntos distintos
@@ -1223,10 +1227,10 @@ C:\..\user1> git commit -m "alteracoes pacote 1: file4.txt e file5.txt"
 C:\..\user1> git add 
 ```
 
-##### 3.11.5. Cenário 11 - Separar as alterações de um mesmo arquivo em dois commits distintos
+##### 4.5. Cenário 11 - Separar as alterações de um mesmo arquivo em dois commits distintos
 
 
-##### 3.11.6. Cenário 12 - Usando Git para arquivos binários
+##### 4.6. Cenário 12 - Usando Git para arquivos binários
 
 
 
