@@ -916,12 +916,11 @@ To https://github.com/josemarsilva/eval-git.git
    26edcbf..ef9759e  develop -> develop
 ```
 
-* No(s) ponto(s) ( `8` e `9`), o usuário **user1** ao tentar fazer o push de `user2`, percebe que houve [conflito](https://help.github.com/en/articles/about-pull-requests) e fica responsável por identificar as diferenças com [git diff](https://help.github.com/en/articles/differences-between-commit-views) e fazer o merge das alterações de `user2` na branch `. 
+* No(s) ponto(s) ( `8` ), o usuário **user1** ao tentar levar seu código de sua branch de feature para a branch `develop`, detecta um [conflito](https://help.github.com/en/articles/about-pull-requests) com a alteração do **user3**. O **user1** fica responsável por identificar e sanar as diferenças com [git diff](https://help.github.com/en/articles/differences-between-commit-views) de suas alterações com as alterações de **user3**
 * Segue aqui mais algumas referências à documentação para resolução de conflitos:
   * [`git merge`](https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-B%C3%A1sico-de-Branch-e-Merge)
   * [How to resolve merge conflict](https://git-scm.com/docs/git-merge#_how_to_resolve_conflicts)
   
-
 
 ```cmd
 C:\..\user1> cd \githome\user1\eval-git
@@ -937,57 +936,87 @@ From https://github.com/josemarsilva/eval-git
 C:\..\user1> git branch
   develop
 * feature_conflict_by_user1
-  feature_conflict_by_user2
   master
+
 C:\..\user1> type file1.txt
 Initialized
 user1 was here
-C:\..\user1> git checkout feature_conflict_by_user2
+
+C:\..\user1> git checkout develop
+Switched to branch 'develop'
+Your branch is behind 'origin/develop' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+C:\..\user1> git pull
+C:\..\user1> git branch
+* develop
+  feature_conflict_by_user1
+  master
+
 C:\..\user1> type file1.txt
 Initialized
-user2 was here
+user3 was here
+
 C:\..\user1> git diff feature_conflict_by_user1
 diff --git a/file1.txt b/file1.txt
-index 471cbf5..635d3fc 100644
+index 471cbf5..efe4168 100644
 --- a/file1.txt
 +++ b/file1.txt
 @@ -1,2 +1,2 @@
  Initialized
 -user1 was here
-+user2 was here
-C:\..\user1> REM O comando de "git merge" vai juntar os dois arquivos no destino. Isto praticamente inutiliza o arquivo.
++user3 was here
+
+C:\..\user1> REM O comando de "git merge" vai juntar os dois arquivos no destino.
+C:\..\user1> REM O Git esta se esforcando para te ajudar, no merge automatico os arquivos serao mesclados
+C:\..\user1> REM O problema é que em se tratando de código, o arquivo pode ser inutilizado
+C:\..\user1> REM No final ele te avisa "CONFLITO" ... "Automatic merge" ... deu merja ... "fix" corrija ai
+
+
 C:\..\user1> git merge feature_conflict_by_user1
 Auto-merging file1.txt
 CONFLICT (content): Merge conflict in file1.txt
 Automatic merge failed; fix conflicts and then commit the result.
-C:\..\user1> git checkout feature_conflict_by_user1
-error: you need to resolve your current index first
-file1.txt: needs merge
+
 C:\..\user1> type file1.txt
 Initialized
 <<<<<<< HEAD
-user2 was here
+user3 was here
 =======
 user1 was here
 >>>>>>> feature_conflict_by_user1
+
 C:\..\user1> git branch
-  develop
+* develop
   feature_conflict_by_user1
-* feature_conflict_by_user2
   master
-  
+
 C:\..\user1> REM "git reset --merge" vai desfazer a merja feita pelo merge padrao
+C:\..\user1> REM mas voce nao esta desobrigado de "fix" corrigir o problema
+C:\..\user1> REM que neste caso é simples, somente acrescentar a altercao de User1 na alteraca de User3
+
 C:\..\user1> git reset --merge
 C:\..\user1> type file1.txt
+Initialized
+user3 was here
+
+C:\..\user1> REM E la vamos nos novamente
 C:\..\user1> git merge feature_conflict_by_user1
-C:\..\user1> REM Editando o arquivo para resolver o confito
+Auto-merging file1.txt
+CONFLICT (content): Merge conflict in file1.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+C:\..\user1> type file1.txt
+
+C:\..\user1> REM Corrigindo "fix" ou com o editor ou neste caso na linha de comando
 C:\..\user1> echo Initialized > file1.txt
+C:\..\user1> echo user3 was here >> file1.txt
 C:\..\user1> echo user1 was here >> file1.txt
-C:\..\user1> echo user2 was here >> file1.txt
 C:\..\user1> type file1.txt
 Initialized
+user3 was here
 user1 was here
-user2 was here
+
 C:\..\user1> git add file1.txt
 C:\..\user1> git merge --continue
 Colocar comentario
@@ -1001,46 +1030,172 @@ Total 3 (delta 1), reused 0 (delta 0)
 remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/josemarsilva/eval-git.git
    62531a0..1df3f0e  feature_conflict_by_user2 -> feature_conflict_by_user2
-C:\..\user1> git checkout feature_conflict_by_user1
-C:\..\user1> echo Initialized > file1.txt
-C:\..\user1> echo user1 was here >> file1.txt
-C:\..\user1> echo user2 was here >> file1.txt
-C:\..\user1> git commit -a -m "."
-C:\..\user1> git push
+
+C:\..\user1> git branch -d feature_conflict_by_user1
+Deleted branch feature_conflict_by_user1 (was 3e3ee09).
 ```
 
-* No(s) ponto(s) ( `10` ), o usuário **user1** ao tentar fazer o merge de sua branch `feature_conflict_by_user1` (que já fez merge com User2) com a branch `develop`, resolve novamente resolver o conflito.
+* No(s) ponto(s) ( `9` ), o usuário **user2** ao tentar levar seu código de sua branch de feature para a branch `develop`, detecta um [conflito](https://help.github.com/en/articles/about-pull-requests) com a alteração do **user1** que neste momento já incorporam a s alterações feitas diretamente na branch `develop` pelo **user3**. Então o **user2** fica responsável por identificar e sanar as diferenças com [git diff](https://help.github.com/en/articles/differences-between-commit-views) de suas alterações com as alterações de **user1**
+* Segue aqui mais algumas referências à documentação para resolução de conflitos:
+  * [`git merge`](https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-B%C3%A1sico-de-Branch-e-Merge)
+  * [How to resolve merge conflict](https://git-scm.com/docs/git-merge#_how_to_resolve_conflicts)
+  
+
+```cmd
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git pull
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 9 (delta 3), reused 8 (delta 2), pack-reused 0
+Unpacking objects: 100% (9/9), done.
+From https://github.com/josemarsilva/eval-git-handson
+   89ab298..400deb4  develop    -> origin/develop
+ * [new branch]      feature_conflict_by_user1 -> origin/feature_conflict_by_user1
+Already up to date.
+
+C:\..\user2> git branch
+  develop
+* feature_conflict_by_user2
+  master
+
+C:\..\user2> type file1.txt
+Initialized
+user2 was here
+
+C:\..\user2> git checkout develop
+Switched to branch 'develop'
+Your branch is behind 'origin/develop' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+C:\..\user2> git pull
+Updating 89ab298..400deb4
+Fast-forward
+ file1.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+C:\..\user2> git branch
+* develop
+  feature_conflict_by_user2
+  master
+
+C:\..\user2> type file1.txt
+Initialized
+user3 was here
+user2 was here
+
+C:\..\user2> git diff feature_conflict_by_user2
+diff --git a/file1.txt b/file1.txt
+index 635d3fc..02e8594 100644
+--- a/file1.txt
++++ b/file1.txt
+@@ -1,2 +1,3 @@
+ Initialized
+-user2 was here
++user3 was here
++user1 was here
+
+feature_conflict_by_user2
+
+C:\..\user2> REM O comando de "git difftool" coloca lado a lado as diferencas e ajuda na correcao
+C:\..\user2> git difftool feature_conflict_by_user2
+Viewing (1/1): 'file1.txt'
+Launch 'vimdiff' [Y/n]?
+:
++------------------------+------------------------+
+| Initialized            | Initialized            |
+| user2 was here         | user3 was here         |
+|                        | user1 was here         |
+|~                       | ~                      |
++------------------------+------------------------+
+:
+
+C:\..\user2> REM Desta vez vamos fazer o merge de feature branch com a develop branch sem "auto merge"
+C:\..\user2> REM Em seguida corrigimos "fix" manualmente, que é só incluir a linha "user2 was here"
+
+
+C:\..\user2> git merge feature_conflict_by_user2
+Auto-merging file1.txt
+CONFLICT (content): Merge conflict in file1.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+C:\..\user2> type file1.txt
+Initialized
+<<<<<<< HEAD
+user3 was here
+user1 was here
+=======
+user2 was here
+>>>>>>> feature_conflict_by_user2
+
+
+C:\..\user2> REM Corrigindo "fix" ou com o editor ou neste caso na linha de comando
+C:\..\user2> echo Initialized > file1.txt
+C:\..\user2> echo user3 was here >> file1.txt
+C:\..\user2> echo user1 was here >> file1.txt
+C:\..\user2> echo user2 was here >> file1.txt
+C:\..\user2> type file1.txt
+Initialized
+user3 was here
+user1 was here
+user2 was here
+
+C:\..\user2> git add file1.txt
+C:\..\user2> git merge --continue
+Colocar comentario e sair com <ESC>:wq!
+
+C:\..\user2> git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 336 bytes | 336.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/josemarsilva/eval-git-handson.git
+   400deb4..0db3fa1  develop -> develop
+
+C:\..\user2> git branch -d feature_conflict_by_user2
+Deleted branch feature_conflict_by_user2 (was 7e23c17).
+```
+
+* No ponto ( `10`) todo mundo faz um `git pull` para baixar como ficou a situação final
 
 ```cmd
 C:\..\user1> cd \githome\user1\eval-git
 C:\..\user1> git pull
-C:\..\user1> git diff develop
-@@ -1,2 +1,3 @@
- Initialized
--user3 was here
-+user1 was here
-+user2 was here
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/josemarsilva/eval-git-handson
+   400deb4..0db3fa1  develop    -> origin/develop
+Updating 400deb4..0db3fa1
+Fast-forward
+ file1.txt | 1 +
+ 1 file changed, 1 insertion(+)
 
-C:\..\user1> git merge develop
-Auto-merging file1.txt
-CONFLICT (content): Merge conflict in file1.txt
-Automatic merge failed; fix conflicts and then commit the result.
-C:\..\user1> git merge --abort
-C:\..\user1> echo user3 was here >> file1.txt
-C:\..\user1> git status
-C:\..\user1> git add file1.txt
-C:\..\user1> git commit -a -m "merge feature_conflict_by_user1 vs develop"
-C:\..\user1> git checkout develop
-C:\..\user1> echo Initialized > file1.txt
-C:\..\user1> echo user1 was here >> file1.txt
-C:\..\user1> echo user2 was here >> file1.txt
-C:\..\user1> echo user3 was here >> file1.txt
-C:\..\user1> git commit -a -m "merge feature_conflict_by_user1 x develop"
-C:\..\user1> git push
-C:\..\user1> git branch -d feature_conflict_by_user1
-C:\..\user1> git branch -d feature_conflict_by_user2
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git pull
+ Already up to date.
+
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user3> git pull
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 12 (delta 4), reused 11 (delta 3), pack-reused 0
+Unpacking objects: 100% (12/12), done.
+From https://github.com/josemarsilva/eval-git-handson
+   6d9b733..0db3fa1  develop    -> origin/develop
+ * [new branch]      feature_conflict_by_user1 -> origin/feature_conflict_by_user1
+ * [new branch]      feature_conflict_by_user2 -> origin/feature_conflict_by_user2
+Updating 6d9b733..0db3fa1
+Fast-forward
+ file1.txt | 2 ++
+ 1 file changed, 2 insertions(+)
 ```
-
 
 #### 4. Uso avançado do Git
 
