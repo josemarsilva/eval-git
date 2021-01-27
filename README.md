@@ -69,6 +69,8 @@ Os pré-requisitos necessários para você continuar são:
 
 ![git-repositories-local-remote-01.png](./doc/git-repositories-local-remote-01.png)
 
+* Sobre os comandos
+
 ![git-repositories-local-remote-02.png](./doc/git-repositories-local-remote-02.png)
 
 
@@ -453,6 +455,12 @@ C:\..\eval-git> dir file8.txt
 Arquivo não encontrado
 ```
 
+#### 3.7.5. Cenário 5: Desistindo de tudo
+
+* Este cenário é como o botão de pânico, você fez muitas alterações ruins e quer jogar tudo fora
+* Há uma forma muito rápida, simples e fácil: apagar tudo e clonar novamente
+* Enquanto você é novato não é vergonhoso ou vexaminoso, mas aprenda a atacar a causa raiz: porque o caos se instalou
+
 
 ### 3.8. Estratégia de gerenciamento de branches
 
@@ -511,7 +519,7 @@ C:\> dir \githome\user3 /s
      :
 ```
 
-* Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [#38-estratégia-de-gerenciamento-de-branches]. Na figura abaixo veremos os comandos das atividades que eles vão executar:
+* Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches). Na figura abaixo veremos os comandos das atividades que eles vão executar:
 
 ![GitTimeline-Example-01.png](./doc/GitTimeline-Example-01.png) 
 
@@ -581,8 +589,8 @@ C:\user2\eval-git> git branch
 C:\> cd \githome\user1\eval-git
 C:\user1\eval-git> echo desenvolvimento nova feature > feature_a.txt
 C:\user1\eval-git> git add .
-C:\user1\eval-git> git commit -a -m "branch develop e feature_a, com arquivo feature_a.txt"
-[feature_a 26edcbf] branch develop e feature_a, com arquivo feature_a.txt
+C:\user1\eval-git> git commit -a -m "branch feature_a, com arquivo feature_a.txt"
+[feature_a 26edcbf] branch feature_a, com arquivo feature_a.txt
  1 file changed, 1 insertion(+)
  create mode 100644 feature_a.txt
 C:\user1\eval-git> git push --set-upstream origin feature_a
@@ -603,6 +611,9 @@ C:\user1\eval-git> git push --set-upstream origin hotfix
 ```
 
 * No(s) pontos: ( `8` ),  as alterações de ambos usuários `user1` e `user2` em suas respectivas branches foram feitas localmente e no repositório central. Porém observe que ao consultar os arquivos da branch `master` no repositório central, ele ainda não reflete a criação dos dois novos arquivos `feature_a.txt` e `hotfix.txt`
+
+* No(s) pontos: ( `8` ),  observe também que branch `develop` no repositório central também ainda não reflete a criação dos dois novos arquivos `feature_a.txt` e `hotfix.txt`
+
 
 ![GitTimeline-Example-03.png](./doc/GitTimeline-Example-03.png) 
 
@@ -666,7 +677,7 @@ nothing to commit, working tree clean
 C:\..\user2\eval-git> git push
 ```
 
-* No(s) pontos: ( `11` ), o arquivo `hotfix.txt` da branch `hotfix` agora também faz parte da branch `master`. O arquivo `feature_a.txt` da branch `feature_a` agora também faz parte da branch `develop`. A branch `develop` ainda não conhece o arquivo `hotfix.txt`.
+* No(s) pontos: ( `11` ), o arquivo `hotfix.txt` da branch `hotfix` agora também faz parte da branch `master`. O arquivo `feature_a.txt` da branch `feature_a` agora também faz parte da branch `develop`. A branch `develop` ainda não conhece o arquivo `hotfix.txt`. E por fim a branch 'feature_a` ainda está no repositorio remoto
 
 ![GitTimeline-Example-07.png](./doc/GitTimeline-Example-07.png) 
 
@@ -823,7 +834,7 @@ To https://github.com/josemarsilva/eval-git.git
    26edcbf..ef9759e  develop -> develop
 ```
 
-* No(s) ponto(s) ( `8` e `9`), o usuário **user1** ao receber notificação do `pull request` de `user2`, percebe que houve [conflito](https://help.github.com/en/articles/about-pull-requests) e fica responsável por identificar as diferenças com [git diff](https://help.github.com/en/articles/differences-between-commit-views) e fazer o merge das alterações de `user2` na branch `. 
+* No(s) ponto(s) ( `8` e `9`), o usuário **user1** ao tentar fazer o push de `user2`, percebe que houve [conflito](https://help.github.com/en/articles/about-pull-requests) e fica responsável por identificar as diferenças com [git diff](https://help.github.com/en/articles/differences-between-commit-views) e fazer o merge das alterações de `user2` na branch `. 
 * Segue aqui mais algumas referências à documentação para resolução de conflitos:
   * [`git merge`](https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-B%C3%A1sico-de-Branch-e-Merge)
   * [How to resolve merge conflict](https://git-scm.com/docs/git-merge#_how_to_resolve_conflicts)
