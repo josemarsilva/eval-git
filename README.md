@@ -462,8 +462,8 @@ Arquivo não encontrado
 #### 3.7.5. Cenário 5: Desistindo de tudo
 
 * Este cenário é como o botão de pânico, você fez muitas alterações ruins e quer jogar tudo fora
-* Há uma forma muito rápida, simples e fácil: apagar tudo e clonar novamente
-* Enquanto você é novato não é vergonhoso ou vexaminoso, mas aprenda a atacar a causa raiz: porque o caos se instalou
+* Há uma forma muito rápida, simples e fácil: apagar tudo e clonar novamente (faremos no próximo exercício)
+* Enquanto você é novato não é vergonhoso ou vexaminoso, mas aprenda a atacar a causa raiz: porque o caos se instalou?
 
 
 ### 3.8. Estratégia de gerenciamento de branches
@@ -503,25 +503,83 @@ Arquivo não encontrado
 
 * Suponha o cenário onde existam 2 usuários simultâneos: user1 e user2. Para simular o cenário, vamos criar 2 (dois subdiretorios) um para cada um deles.
 * Todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
-* Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos.
+* Vamos listar o conteúdo dos diretórios dos usuários e observar que todos estão com os mesmos conteúdos
 
 ```cmd
-C:\> md \githome\user1
-C:\> md \githome\user2
-C:\> md \githome\user3
-C:\> cd \githome\user1
+C:\..\user1> cd \githome\user1
 C:\..\user1> git clone https://github.com/josemarsilva/eval-git.git
-C:\user1> cd \githome\user2
-C:\user2> git clone https://github.com/josemarsilva/eval-git.git
-C:\user2> cd \githome\user3
-C:\user3> git clone https://github.com/josemarsilva/eval-git.git
-C:\> dir \githome\user1
+C:\..\user1> cd \githome\user2
+C:\..\user2> git clone https://github.com/josemarsilva/eval-git.git
+C:\..\user2> cd \githome\user3
+C:\..\user3> git clone https://github.com/josemarsilva/eval-git.git
+C:\> dir \githome\user1\eval-git
+C:\> dir \githome\user2\eval-git
+C:\> dir \githome\user3\eval-git
      :
-C:\> dir \githome\user2
+19/06/2019  17:58    <DIR>          doc
+19/06/2019  17:58                14 file1.txt
+19/06/2019  17:58                14 file2.txt
+19/06/2019  17:58                14 file3.txt
+19/06/2019  17:58                19 hotfix.txt
+19/06/2019  17:58            23.831 README.md
      :
-C:\> dir \githome\user3
+C:\> type \githome\user1\eval-git\file1.txt
+C:\> type \githome\user1\eval-git\file2.txt
+C:\> type \githome\user1\eval-git\file3.txt
+     :
+Initialized
      :
 ```
+
+* Observe também que quando fizemos a clonagem nova, somente a branch `master` foi baixada para o repositório local
+* Vamos listar as branchs que cada um dos usuários está vendo após o `clone`
+
+```cmd
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git branch
+* master
+  
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git branch
+* master
+
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user2> git branch
+* master
+```
+
+* Em seguida vamos restaurar com `checkout` as branch `develop` para cada um dos usuários
+
+```cmd
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git checkout develop
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
+
+C:\..\user1> git branch
+* develop
+  master
+  
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git checkout develop
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
+
+C:\..\user2> git branch
+* develop
+  master
+  
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user3> git checkout develop
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
+
+C:\..\user3> git branch
+* develop
+  master
+  
+```
+
 
 * Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches). Na figura abaixo veremos os comandos das atividades que eles vão executar:
 
@@ -531,7 +589,6 @@ C:\> dir \githome\user3
 
 ```cmd
 C:\> cd \githome\user1\eval-git
-C:\user1\eval-git> git branch develop
 C:\user1\eval-git> git checkout develop
 Switched to branch 'develop'
 C:\user1\eval-git> dir
@@ -696,7 +753,8 @@ C:\..\user2\eval-git> git push
 
 
 * No(s) ponto(s) ( `1`), todos os usuários, `user1`, `user2` e `user3` vão fazer um `git clone` da posição atual do repositório [`git clone`](https://git-scm.com/docs/git-clone)
-* Vamos listar o conteúdo dos diretórios dos dois usuários e observar que eles são os mesmos
+* Observe que não é possível clonar um repositório existente. Para efeito didáticos vamos desistir destas alterações locais e clonar novamente os 3 usuários, porém esta ação é opcional porque neste momento todos os diretórios estão atualizados e você também perceberá que esta decisão traz consequencias adicionais
+* Vamos listar o conteúdo dos diretórios dos usuários e observar que todos estão com os mesmos conteúdos
 
 ```cmd
 C:\..\user1> cd \githome\user1
@@ -716,7 +774,17 @@ C:\> dir \githome\user3\eval-git
 19/06/2019  17:58                19 hotfix.txt
 19/06/2019  17:58            23.831 README.md
      :
+C:\> type \githome\user1\eval-git\file1.txt
+C:\> type \githome\user1\eval-git\file2.txt
+C:\> type \githome\user1\eval-git\file3.txt
+     :
+Initialized
+     :
 ```
+
+* Observe também que quando fizemos a clonagem nova, somente a branch `master` foi baixada para o repositório local
+* Vamos listar as branchs que cada um dos usuários está vendo após o `clone`
+
 
 * No(s) ponto(s) ( `2`, `3` e `4`), simultaneamente, os 3 usuários `user1`, `user2` e `user3` que durante suas atividades necessitam alterar o arquivo `file1.txt`. Todos os 3 usuários irão modificar o mesmo arquivo `file1.txt':
   * `user1`, seguindo o procedimento vai criar uma branch `feature_user1` e fazer sua alteração no arquivo `file1.txt` na branch `feature_user1`.
