@@ -39,7 +39,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * Situações comuns
   * Ignorar arquivos
   * Ignorar arquivos após terem sido registrados acidentalmente no repositório
-* Normas, Padrões, Convenções, Melhores Práticas, Lições Aprendidas, Deslize, Micos e Vexames
+* Normas, Padrões, Convenções, Melhores Práticas, Lições Aprendidas, Deslizes e Vexames
 
 
 ---
