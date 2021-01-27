@@ -20,7 +20,7 @@ O objetivo deste projeto é explorar os principais conceitos, comandos e cenári
 * [Inicializando repositório](#33-inicializando-repositório)
 * [Criando primeiro arquivo no repositorio](#34-criando-primeiro-arquivo-no-repositorio)
 * [Alterando conteúdo de arquivo](#35-alterando-conteúdo-de-arquivo)
-* [Desistindo de alterações e revertendo alterações](#37-desistindo-de-alteracoes-e-revertendo-alteracoes)
+* [Desistindo de alterações e revertendo alterações](#37-desistindo-de-alterações-e-revertendo-alterações)
   * [Cenário 1: Desistindo da criação de um arquivo local](#371-cenário-1-desistindo-da-criação-de-um-arquivo-local)
   * [Cenário 2: Desistindo de adicionar um arquivo ao repositório local](#372-cenário-2-desistindo-de-adicionar-um-arquivo-ao-repositório-local)
   * [Cenário 3: Removendo um arquivo do repositorio local](#373-cenario-3-removendo-um-arquivo-do-repositorio-local)
@@ -384,7 +384,7 @@ C:\..\eval-git> git status
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-        file5.txt
+        file6.txt
   :
 C:\..\eval-git> git add file6.txt
 C:\..\eval-git> git commit -a -m "file6.txt"
@@ -504,18 +504,18 @@ Arquivo não encontrado
 ```cmd
 C:\> md \githome\user1
 C:\> md \githome\user2
-C:\> md \githome\user1
+C:\> md \githome\user3
 C:\> cd \githome\user1
 C:\..\user1> git clone https://github.com/josemarsilva/eval-git.git
 C:\user1> cd \githome\user2
 C:\user2> git clone https://github.com/josemarsilva/eval-git.git
 C:\user2> cd \githome\user3
 C:\user3> git clone https://github.com/josemarsilva/eval-git.git
-C:\> dir \githome\user1 /s
+C:\> dir \githome\user1
      :
-C:\> dir \githome\user2 /s
+C:\> dir \githome\user2
      :
-C:\> dir \githome\user3 /s 
+C:\> dir \githome\user3
      :
 ```
 
