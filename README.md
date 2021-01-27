@@ -61,8 +61,9 @@ Os pré-requisitos necessários para você continuar são:
 * [Laboratório de aprendizado do Git](https://lab.github.com/)
 * [Laboratório Github](https://youtu.be/9S0p8YMQzsM)
 * [Guia dos principais comandos](https://help.github.com/en#dotcom)
+* [Git Manual de Bolso](https://ndpsoftware.com/git-cheatsheet.html)
 
-#### 3.2.1. O mínimo que você precisa saber
+#### 3.2.1. O mínimo que você precisa saber para começar
 
 * Sobre repositório local e remoto
 
@@ -117,9 +118,19 @@ C:\>
 ![gitlab-create-repository-web-interace-03.png](./doc/gitlab-create-repository-web-interace-03.png)
 
 
-* Clonando o repositório do GitHub
+* Clonando o repositório do GitLab
 
 ![gitlab-create-repository-web-interace-04.png](./doc/gitlab-create-repository-web-interace-04.png)
+
+```cmd
+C:\..\eval-git> git clone https://gitlab.com/josemarsilva/eval-git.git
+Cloning into 'eval-git'...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (4/4), done.
+```
 
 
 #### 3.4. Configurando seu usuario e senha
@@ -1212,7 +1223,6 @@ C:\..\user1> git add
 ## I - References
 
 * [Git Help](https://git-scm.com/)
-* [Git Manual de Bolso](https://ndpsoftware.com/git-cheatsheet.html)
 * [Git Branch Model](https://nvie.com/posts/a-successful-git-branching-model/)
 * [Git Numerosas possibilidades de defazer algo](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#quickly-save-local-changes)
 * [Git Merge Conflict - Youtube](https://www.youtube.com/watch?v=__cR7uPBOIk)
