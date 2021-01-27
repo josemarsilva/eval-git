@@ -165,7 +165,7 @@ git config --list
 * Sincronizando com o repositório centralizado do GitHub [`git remote add`](https://help.github.com/en/articles/adding-a-remote)
 
 ```cmd
-C:\..\eval-git> echo "# eval-git" >> README.md
+C:\..\eval-git> echo # eval-git >> README.md
 C:\..\eval-git> git status
 On branch master
 
@@ -251,6 +251,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 C:\..\eval-git> git commit -a -m "."
 [master 7cbddaa] .
  1 file changed, 20 insertions(+), 1 deletion(-)
+
 C:\..\eval-git> git push
 Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
@@ -269,11 +270,12 @@ To https://github.com/josemarsilva/eval-git.git
 * Obtenha a url do projeto no seu repositório público de [Github](https://github.com/josemarsilva/eval-git). 
 * Em seguida execute o comando [`git clone`](https://git-scm.com/docs/git-clone)
 * Lembre-se: O clone não pode ser feito sobre um sub diretório que já existe
+* Este `clone` é opcional porque o repositório de sua máquina local acabou de ser atualizado
 
 ![github-clone-repository-01.png](./doc/github-clone-repository-01.png) 
 
 ```cmd
-C:\..\eval-git> git clone https://github.com/josemarsilva/eval-git.git
+C:\..\workspace> git clone https://github.com/josemarsilva/eval-git.git
 Cloning into 'eval-git'...
 remote: Enumerating objects: 4, done.
 remote: Counting objects: 100% (4/4), done.
@@ -463,7 +465,7 @@ Arquivo não encontrado
 
 * Este cenário é como o botão de pânico, você fez muitas alterações ruins e quer jogar tudo fora
 * Há uma forma muito rápida, simples e fácil: apagar tudo e clonar novamente (faremos no próximo exercício)
-* Enquanto você é novato não é vergonhoso ou vexaminoso, mas aprenda a atacar a causa raiz: porque o caos se instalou?
+* Enquanto você é novato não é vergonhoso ou vexaminoso, mas aprenda a entender e atacar a causa raiz: porque o caos se instalou?
 
 
 ### 3.8. Estratégia de gerenciamento de branches
@@ -506,6 +508,10 @@ Arquivo não encontrado
 * Vamos listar o conteúdo dos diretórios dos usuários e observar que todos estão com os mesmos conteúdos
 
 ```cmd
+C:\..\workspace> md \githome\user1
+C:\..\workspace> md \githome\user2
+C:\..\workspace> md \githome\user3
+
 C:\..\user1> cd \githome\user1
 C:\..\user1> git clone https://github.com/josemarsilva/eval-git.git
 C:\..\user1> cd \githome\user2
@@ -516,11 +522,9 @@ C:\> dir \githome\user1\eval-git
 C:\> dir \githome\user2\eval-git
 C:\> dir \githome\user3\eval-git
      :
-19/06/2019  17:58    <DIR>          doc
 19/06/2019  17:58                14 file1.txt
 19/06/2019  17:58                14 file2.txt
 19/06/2019  17:58                14 file3.txt
-19/06/2019  17:58                19 hotfix.txt
 19/06/2019  17:58            23.831 README.md
      :
 C:\> type \githome\user1\eval-git\file1.txt
@@ -531,57 +535,8 @@ Initialized
      :
 ```
 
-* Observe também que quando fizemos a clonagem nova, somente a branch `master` foi baixada para o repositório local
-* Vamos listar as branchs que cada um dos usuários está vendo após o `clone`
-
-```cmd
-C:\..\user1> cd \githome\user1\eval-git
-C:\..\user1> git branch
-* master
-  
-C:\..\user2> cd \githome\user2\eval-git
-C:\..\user2> git branch
-* master
-
-C:\..\user3> cd \githome\user3\eval-git
-C:\..\user2> git branch
-* master
-```
-
-* Em seguida vamos restaurar com `checkout` as branch `develop` para cada um dos usuários
-
-```cmd
-C:\..\user1> cd \githome\user1\eval-git
-C:\..\user1> git checkout develop
-Switched to a new branch 'develop'
-Branch 'develop' set up to track remote branch 'develop' from 'origin'.
-
-C:\..\user1> git branch
-* develop
-  master
-  
-C:\..\user2> cd \githome\user2\eval-git
-C:\..\user2> git checkout develop
-Switched to a new branch 'develop'
-Branch 'develop' set up to track remote branch 'develop' from 'origin'.
-
-C:\..\user2> git branch
-* develop
-  master
-  
-C:\..\user3> cd \githome\user3\eval-git
-C:\..\user3> git checkout develop
-Switched to a new branch 'develop'
-Branch 'develop' set up to track remote branch 'develop' from 'origin'.
-
-C:\..\user3> git branch
-* develop
-  master
-  
-```
-
-
 * Ambos usuários `user1` e `user2` vão trabalhar sobre o mesmo projeto `eval-git` em branches separadas adotando a [Estratégia de gerenciamento de branches](#38-estratégia-de-gerenciamento-de-branches). Na figura abaixo veremos os comandos das atividades que eles vão executar:
+* Neste ponto nenhuma das branches fixas da estratégia de branches ( develop, hotfix, feature, release, etc ) foi criada previamente, vamos deixar para cada um dos usuários criá-las conforme a necessidade
 
 ![GitTimeline-Example-01.png](./doc/GitTimeline-Example-01.png) 
 
@@ -589,11 +544,11 @@ C:\..\user3> git branch
 
 ```cmd
 C:\> cd \githome\user1\eval-git
+C:\user1\eval-git> git branch develop
 C:\user1\eval-git> git checkout develop
 Switched to branch 'develop'
 C:\user1\eval-git> dir
   :
-12/06/2019  23:30    <DIR>          doc
 12/06/2019  23:30                14 file1.txt
 12/06/2019  23:30                14 file2.txt
 12/06/2019  23:30                14 file3.txt
@@ -604,7 +559,6 @@ C:\user1\eval-git> git checkout feature_a
 Switched to branch 'feature_a'
 C:\user1\eval-git> dir
   :
-12/06/2019  23:30    <DIR>          doc
 12/06/2019  23:30                14 file1.txt
 12/06/2019  23:30                14 file2.txt
 12/06/2019  23:30                14 file3.txt
@@ -628,7 +582,6 @@ C:\user2\eval-git> git checkout hotfix
 Switched to branch 'hotfix'
 C:\user2\eval-git> dir
   :
-12/06/2019  23:30    <DIR>          doc
 12/06/2019  23:30                14 file1.txt
 12/06/2019  23:30                14 file2.txt
 12/06/2019  23:30                14 file3.txt
@@ -648,6 +601,11 @@ C:\user2\eval-git> git branch
 
 ```cmd
 C:\> cd \githome\user1\eval-git
+C:\user1\eval-git> git branch
+  develop
+* feature_a
+  master
+  
 C:\user1\eval-git> echo desenvolvimento nova feature > feature_a.txt
 C:\user1\eval-git> git add .
 C:\user1\eval-git> git commit -a -m "branch feature_a, com arquivo feature_a.txt"
@@ -662,6 +620,10 @@ C:\user1\eval-git> git push --set-upstream origin feature_a
 
 ```cmd
 C:\> cd \githome\user2\eval-git
+C:\user2\eval-git> git branch
+* hotfix
+  master
+
 C:\user2\eval-git> echo correcao urgente > hotfix.txt
 C:\user2\eval-git> git add .
 C:\user2\eval-git> git commit -a -m "branch hotfix com arquivo hotfix.txt"
@@ -726,7 +688,8 @@ C:\..\user2\eval-git> git branch
 C:\..\user2\eval-git> git checkout master
 C:\..\user2\eval-git> git pull
 C:\..\user2\eval-git> git merge hotfix
-Merge made by the 'recursive' strategy.
+Updating 7b6ef99..1ba1a3d
+Fast-forward
  hotfix.txt | 1 +
  1 file changed, 1 insertion(+)
  create mode 100644 hotfix.txt
@@ -738,7 +701,10 @@ nothing to commit, working tree clean
 C:\..\user2\eval-git> git push
 ```
 
-* No(s) pontos: ( `11` ), o arquivo `hotfix.txt` da branch `hotfix` agora também faz parte da branch `master`. O arquivo `feature_a.txt` da branch `feature_a` agora também faz parte da branch `develop`. A branch `develop` ainda não conhece o arquivo `hotfix.txt`. E por fim a branch 'feature_a` ainda está no repositorio remoto
+* No(s) pontos: ( `11` ), o arquivo `hotfix.txt` da branch `hotfix` agora também faz parte da branch `master`
+  * O arquivo `feature_a.txt` da branch `feature_a` agora também faz parte da branch `develop`
+  * A branch `feature_a` foi removida do repositorio local, mas continua armazenada no remoto
+  * A branch `develop` ainda não conhece o arquivo `hotfix.txt`
 
 ![GitTimeline-Example-07.png](./doc/GitTimeline-Example-07.png) 
 
@@ -767,7 +733,6 @@ C:\> dir \githome\user1\eval-git
 C:\> dir \githome\user2\eval-git
 C:\> dir \githome\user3\eval-git
      :
-19/06/2019  17:58    <DIR>          doc
 19/06/2019  17:58                14 file1.txt
 19/06/2019  17:58                14 file2.txt
 19/06/2019  17:58                14 file3.txt
@@ -785,6 +750,51 @@ Initialized
 * Observe também que quando fizemos a clonagem nova, somente a branch `master` foi baixada para o repositório local
 * Vamos listar as branchs que cada um dos usuários está vendo após o `clone`
 
+```cmd
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git branch
+* master
+  
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git branch
+* master
+
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user2> git branch
+* master
+```
+
+* Em seguida vamos restaurar com `checkout` as branch `develop` para cada um dos usuários
+
+```cmd
+C:\..\user1> cd \githome\user1\eval-git
+C:\..\user1> git checkout develop
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
+
+C:\..\user1> git branch
+* develop
+  master
+  
+C:\..\user2> cd \githome\user2\eval-git
+C:\..\user2> git checkout develop
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
+
+C:\..\user2> git branch
+* develop
+  master
+  
+C:\..\user3> cd \githome\user3\eval-git
+C:\..\user3> git checkout develop
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
+
+C:\..\user3> git branch
+* develop
+  master
+  
+```
 
 * No(s) ponto(s) ( `2`, `3` e `4`), simultaneamente, os 3 usuários `user1`, `user2` e `user3` que durante suas atividades necessitam alterar o arquivo `file1.txt`. Todos os 3 usuários irão modificar o mesmo arquivo `file1.txt':
   * `user1`, seguindo o procedimento vai criar uma branch `feature_user1` e fazer sua alteração no arquivo `file1.txt` na branch `feature_user1`.
