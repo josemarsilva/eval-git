@@ -1,1 +1,4 @@
 Initialized 
+user1 was here 
+user2 was here 
+user3 was here 
